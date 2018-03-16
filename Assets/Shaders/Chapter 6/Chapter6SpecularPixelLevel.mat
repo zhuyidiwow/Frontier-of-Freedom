@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Chapter6SpecularPixelLevel
-  m_Shader: {fileID: 4800000, guid: d75864ffed5a162449ce0ae93a77023b, type: 3}
+  m_Shader: {fileID: 4800000, guid: 9c28c861733380045a873a6be838f21b, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -59,7 +59,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Gloss: 152.8
+    - _Gloss: 35.2
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1

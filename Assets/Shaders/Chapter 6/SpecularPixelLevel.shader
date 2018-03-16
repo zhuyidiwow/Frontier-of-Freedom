@@ -1,6 +1,6 @@
 ﻿// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
-Shader "Shader Book/Chapter 6/SpecularVertexLevel" {
+Shader "Shader Book/Chapter 6/SpecularPixelLevel" {
 
 	Properties {
 	    _Diffuse ("Diffuse", Color) = (1, 1, 1, 1)
