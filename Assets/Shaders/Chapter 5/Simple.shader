@@ -9,6 +9,7 @@ Shader "Shader Book/Chapter 5/Simple" {
     SubShader {
         Pass {
             CGPROGRAM
+            #include "UnityCG.cginc"
             #pragma vertex vert
 			#pragma fragment frag
             
