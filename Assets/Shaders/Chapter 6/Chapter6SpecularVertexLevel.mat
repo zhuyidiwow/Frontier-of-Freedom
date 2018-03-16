@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Chapter6DiffuseVertexLevelMat
+  m_Name: Chapter6DiffuseVertexLevel
   m_Shader: {fileID: 4800000, guid: ec06f6d6c9382634aa50d0b07ad0c77f, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4

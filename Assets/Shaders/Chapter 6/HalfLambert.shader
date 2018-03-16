@@ -1,6 +1,6 @@
 ﻿// Upgrade NOTE: replaced '_World2Object' with 'unity_WorldToObject'
 
-Shader "Shader Book/Chapter 6/DiffusePixelLevel" {
+Shader "Shader Book/Chapter 6/HalfLambert" {
 
 	Properties {
 	    _Diffuse ("Diffuse", Color) = (1, 1, 1, 1)   
@@ -44,7 +44,7 @@ Shader "Shader Book/Chapter 6/DiffusePixelLevel" {
 			    fixed3 worldNormal = i.worldNormal;
 			    fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz);
 			    
-			    fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * saturate(dot(worldNormal, worldLightDir));
+			    fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * (0.5 * dot(worldNormal, worldLightDir) + 0.5);
 			    fixed3 color = ambient + diffuse;
 			    
 			    return fixed4(color, 1.0);
