@@ -9,6 +9,10 @@ public class Enemy : Breakable {
 	private Player player;
 
 	private void Start() {
+		if (Random.Range(0f, 1f) < 0.5f) {
+			Destroy(gameObject);
+		}
+		
 		player = Player.Instance;
 		
 	}
