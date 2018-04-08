@@ -3,14 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
-
+	public static CameraManager Instance;
+	
 	public float OffsetMultiplier;
-	private Vector3 offset;
 
+	[HideInInspector] public Vector2 ViewRange;
+	private Vector3 offset;
 	private Player player;
+	
+	private void Awake() {
+		if (Instance == null) Instance = this;
+//		Debug.Log(Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 14.13f)));
+//		Debug.Log(Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, 14.13f)));
+		ViewRange = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 14.13f)) - Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, 14.13f));
+		Debug.Log(ViewRange);
+	}
+
+	void OnDrawGizmosSelected()
+	{
+		Camera camera = GetComponent<Camera>();
+		Vector3 p = camera.ViewportToWorldPoint(new Vector3(1, 1, OffsetMultiplier));
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawSphere(p, 0.1F);
+	}
 	
 	private void Start() {
 		player = Player.Instance;
+		
 	}
 
 	private void Update() {

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Chunk : MonoBehaviour {
-	public GameObject EnemyPrefab;
-	
 	private ChunkManager chunkManager;
 	private Transform player;
 	
@@ -33,7 +31,7 @@ public class Chunk : MonoBehaviour {
 		leftBound = transform.position.x - chunkManager.HoriStep.x / 2f;
 		threshold = chunkManager.Threshold;
 
-		if (GameManager.Instance.ShouldSpawnEnemies()) {
+		if (EnemyManager.Instance.ShouldSpawnEnemies()) {
 			SpawnEnemies();
 		}
 	}
@@ -47,8 +45,8 @@ public class Chunk : MonoBehaviour {
 		
 		for (int i = 0; i < enemyCount; i++) {
 			Vector3 offset = new Vector3(Random.Range(horiMin, horiMax), Random.Range(verMin, verMax), 0f);
-			Instantiate(EnemyPrefab, transform.position + offset, Quaternion.identity, transform);
-			GameManager.Instance.EnemyCount++;
+			GameObject enemy = Instantiate(PrefabManager.Instance.Enemy, transform.position + offset, Quaternion.identity, EnemyManager.Instance.transform);
+			EnemyManager.Instance.Enemies.Add(enemy.GetComponent<Enemy>());
 		}
 	}
 

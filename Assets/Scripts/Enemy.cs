@@ -38,6 +38,6 @@ public class Enemy : Breakable {
 
 	public override void Break() {
 		base.Break();
-		GameManager.Instance.EnemyCount--;
+		EnemyManager.Instance.Delete(this);
 	}
 }
