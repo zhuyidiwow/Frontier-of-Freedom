@@ -14,7 +14,7 @@ public class Missile : MonoBehaviour {
 		
 		if (otherObj.CompareTag("Enemy")) {
 			GameManager.Instance.Score(otherObj.GetComponent<Enemy>().Score);
-			otherObj.GetComponent<Breakable>().Break();
+			otherObj.GetComponent<Enemy>().Break();
 		}
 
 		

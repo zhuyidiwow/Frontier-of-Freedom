@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Enemy : Breakable {
 
@@ -32,5 +34,10 @@ public class Enemy : Breakable {
 		if (rb.velocity.magnitude > maxSpeed) {
 			rb.velocity = maxSpeed * rb.velocity.normalized;
 		}
+	}
+
+	public override void Break() {
+		base.Break();
+		GameManager.Instance.EnemyCount--;
 	}
 }
