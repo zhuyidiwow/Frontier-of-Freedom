@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour {
 		scoreText.text = score.ToString();
 	}
 
-	private void Start() {
+	private void Awake() {
 		Instance = this;
 	}
 }

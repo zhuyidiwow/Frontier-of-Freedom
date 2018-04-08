@@ -17,8 +17,6 @@ public class Missile : MonoBehaviour {
 			otherObj.GetComponent<Enemy>().Break();
 		}
 
-		
-		
 		GameObject particle = Instantiate(particlePrefab, transform.position, Quaternion.identity);
 		Destroy(particle, 3f);
 		Destroy(gameObject);

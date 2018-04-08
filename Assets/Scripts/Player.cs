@@ -5,16 +5,21 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 	public static Player Instance;
-	
-	[SerializeField] private float missileSpeed;
-	[SerializeField] private float speedChange;
 
-	[SerializeField] private GameObject missilePrefab;
-	[SerializeField] private GameObject gun;
+	public Weapon gunPrefab;
+	
+	[SerializeField] private float speedChange;
 	
 	private Rigidbody rb;
 	private Coroutine addForceCoroutine;
 	private Plane plane;
+	private List<Weapon> weapons;
+
+	public void PickUpWeapon(Weapon newWeapon) {
+		newWeapon = Instantiate(newWeapon).GetComponent<Weapon>();
+		newWeapon.transform.parent = transform;
+		weapons.Add(newWeapon);
+	}
 
 	private void Awake() {
 		if (Instance == null) Instance = this;
@@ -24,6 +29,8 @@ public class Player : MonoBehaviour {
 	void Start() {
 		rb = GetComponent<Rigidbody>();
 		plane = new Plane(Vector3.back, transform.position);
+		weapons = new List<Weapon>();
+		weapons.Add(Instantiate(gunPrefab).GetComponent<Weapon>());
 	}
 
 	private void Update() {
@@ -33,20 +40,32 @@ public class Player : MonoBehaviour {
 		Vector3 mousePos = ray.origin + ray.direction * distance;
 		Vector3 dir = mousePos - transform.position;
 		dir = dir.normalized;
+
+		int weaponCount = weapons.Count;
 		
-		gun.transform.position = 0.5f * dir + transform.position;
-		gun.transform.LookAt(mousePos);
+		Vector3 baseDir = Quaternion.AngleAxis(-45f, Vector3.back) * dir;
+		float angleStep = 90f / (weaponCount + 1);
+		
+		List<Vector3> dirList = new List<Vector3>();
+		
+		for (int i = 0; i < weaponCount; i++) {
+			dirList.Add(Quaternion.AngleAxis(angleStep * (i + 1), Vector3.back) * baseDir);
+			Weapon weapon = weapons[i];
+			weapon.transform.position = 0.5f * dirList[i] + transform.position;
+			weapon.transform.LookAt(transform.position + dirList[i]);
+		}
 		
 		if (Input.GetMouseButtonDown(0)) {
-			Shoot(dir);
+			for (int i = 0; i < weaponCount; i++) {
+				weapons[i].Shoot(dirList[i]);
+			}
+			
+			rb.velocity += -dir * speedChange;
 		}
-	}
 
-	private void Shoot(Vector3 dir) {
-		GameObject missile = Instantiate(missilePrefab, transform.position + dir, Quaternion.identity, null);
-		missile.GetComponent<Rigidbody>().velocity = dir * missileSpeed;
-		
-		rb.velocity += -dir * speedChange;
+		if (Input.GetKeyDown(KeyCode.T)) {
+			weapons.Add(Instantiate(gunPrefab).GetComponent<Weapon>());
+		}
 	}
 
 	private void AddForce(Vector3 force, float duration) {
