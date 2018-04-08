@@ -185,9 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e76f9b8b8374416b9a46a75f82070be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunPrefab: {fileID: 114198321217426660, guid: c613d005f1963534a9026f2c8f8f4273,
-    type: 2}
-  speedChange: 7.5
+  baseSpeedChange: 8
 --- !u!23 &189305071
 MeshRenderer:
   m_ObjectHideFlags: 0

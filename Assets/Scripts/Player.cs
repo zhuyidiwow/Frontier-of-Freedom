@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 	public static Player Instance;
-
-	public Weapon gunPrefab;
 	
-	[SerializeField] private float speedChange;
+	[SerializeField] private float baseSpeedChange;
 	
 	private Rigidbody rb;
 	private Coroutine addForceCoroutine;
@@ -29,8 +27,7 @@ public class Player : MonoBehaviour {
 	void Start() {
 		rb = GetComponent<Rigidbody>();
 		plane = new Plane(Vector3.back, transform.position);
-		weapons = new List<Weapon>();
-		weapons.Add(Instantiate(gunPrefab).GetComponent<Weapon>());
+		weapons = new List<Weapon> {Instantiate(PrefabManager.Instance.MissileLauncher).GetComponent<Weapon>()};
 	}
 
 	private void Update() {
@@ -59,12 +56,9 @@ public class Player : MonoBehaviour {
 			for (int i = 0; i < weaponCount; i++) {
 				weapons[i].Shoot(dirList[i]);
 			}
-			
-			rb.velocity += -dir * speedChange;
-		}
 
-		if (Input.GetKeyDown(KeyCode.T)) {
-			weapons.Add(Instantiate(gunPrefab).GetComponent<Weapon>());
+			float speedChange = baseSpeedChange * Mathf.Sqrt(weaponCount);
+			rb.velocity += -dir * speedChange;
 		}
 	}
 
