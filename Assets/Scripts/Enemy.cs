@@ -18,6 +18,7 @@ public class Enemy : Breakable {
 		player = Player.Instance;
 		rb = GetComponent<Rigidbody>();
 		maxSpeed *= Random.Range(0.5f, 1.5f);
+		StartCoroutine(DistanceCheck());
 	}
 
 	private void FixedUpdate() {
@@ -39,5 +40,15 @@ public class Enemy : Breakable {
 	public override void Break() {
 		base.Break();
 		EnemyManager.Instance.Delete(this);
+	}
+
+	private IEnumerator DistanceCheck() {
+		while (true) {
+			if (Vector3.Distance(Player.Instance.transform.position, transform.position) > 50f) {
+				EnemyManager.Instance.SpawnOne();
+				Break();
+			}
+			yield return new WaitForSeconds(1f);
+		}
 	}
 }

@@ -153,6 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139fe25a29615234a949c9bb393e8fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxEnemy: 30
+  Enemies: []
 --- !u!1 &189305069
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,8 +454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b1e6ce1b47a9b047b81742361738970, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyCount: 0
-  MaxEnemy: 20
   scoreText: {fileID: 1522765482}
 --- !u!4 &627214122
 Transform:
@@ -728,7 +728,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b155fbce19a9c4c82ac127268ebc5e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OffsetMultiplier: 3
+  OffsetMultiplier: 2
+  ViewRange: {x: 0, y: 0}
 --- !u!114 &1121270725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,6 +972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MissileLauncher: {fileID: 114198321217426660, guid: c613d005f1963534a9026f2c8f8f4273,
     type: 2}
+  Enemy: {fileID: 1050155766903038, guid: 1cecaf463cdfca741bc11aceb40373cf, type: 2}
 --- !u!4 &1527709334
 Transform:
   m_ObjectHideFlags: 0
