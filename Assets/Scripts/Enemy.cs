@@ -4,29 +4,33 @@ using UnityEngine;
 
 public class Enemy : Breakable {
 
-	[SerializeField] private float moveSpeed;
+	public int Score;
+	
+	[SerializeField] private float moveForce;
+	[SerializeField] private float maxSpeed;
 	
 	private Player player;
-
+	private Rigidbody rb;
+	
 	private void Start() {
-		if (Random.Range(0f, 1f) < 0.5f) {
-			Destroy(gameObject);
-		}
-		
 		player = Player.Instance;
-		
+		rb = GetComponent<Rigidbody>();
+		maxSpeed *= Random.Range(0.5f, 1.5f);
 	}
 
-	private void Update() {
+	private void FixedUpdate() {
 		Vector3 dir = (player.transform.position - transform.position).normalized;
 		dir.z = 0f;
-		transform.Translate(dir * moveSpeed * Time.deltaTime, Space.World);
+		
+		rb.AddForce(moveForce * dir, ForceMode.Force);
+		CapSpeed();
+		
 		transform.LookAt(player.transform.position);
 	}
 
-	private void OnCollisionEnter(Collision other) {
-		if (other.gameObject.CompareTag("Projectile")) {
-			Break();
+	private void CapSpeed() {
+		if (rb.velocity.magnitude > maxSpeed) {
+			rb.velocity = maxSpeed * rb.velocity.normalized;
 		}
 	}
 }

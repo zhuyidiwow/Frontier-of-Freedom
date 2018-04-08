@@ -6,6 +6,7 @@ public class ChunkManager : MonoBehaviour {
 
     public float Threshold;
     public GameObject ChunkPrefab;
+    public int AverageEnemy = 5;
     
     [HideInInspector] public Vector3 HoriStep;
     [HideInInspector] public Vector3 VerStep;

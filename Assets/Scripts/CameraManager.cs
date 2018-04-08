@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour {
 
-	public GameObject FollowedGameObject;
-	public float LerpFactor;
+	public float OffsetMultiplier;
+	private Vector3 offset;
+
+	private Player player;
 	
+	private void Start() {
+		player = Player.Instance;
+	}
+
 	private void Update() {
-		Vector3 targetPosition = FollowedGameObject.transform.position;
+		Vector3 mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+		mousePos -= new Vector3(0.5f, 0.5f, 0f);
+		offset = mousePos * OffsetMultiplier;
+		Vector3 targetPosition = player.transform.position + offset;
 		targetPosition.z = transform.position.z;
-//		transform.position = Vector3.Lerp(transform.position, targetPosition, LerpFactor * Time.deltaTime);
 		transform.position = targetPosition;
 	}
 }

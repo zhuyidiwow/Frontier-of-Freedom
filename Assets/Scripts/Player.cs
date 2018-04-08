@@ -40,25 +40,12 @@ public class Player : MonoBehaviour {
 		if (Input.GetMouseButtonDown(0)) {
 			Shoot(dir);
 		}
-
-		if (Input.GetMouseButtonDown(1)) {
-			if (GameManager.Instance.HasPower()) {
-				GameManager.Instance.UsePower();
-				Shoot(Vector3.up);
-				Shoot(Vector3.right);
-				Shoot(Vector3.down);
-				Shoot(Vector3.left);
-				Shoot(Vector3.up /2f + Vector3.right/2f);
-				Shoot(Vector3.up /2f + Vector3.left/2f);
-				Shoot(Vector3.down /2f + Vector3.right/2f);
-				Shoot(Vector3.down/2f + Vector3.left/2f);
-			}
-		}
 	}
 
 	private void Shoot(Vector3 dir) {
 		GameObject missile = Instantiate(missilePrefab, transform.position + dir, Quaternion.identity, null);
 		missile.GetComponent<Rigidbody>().velocity = dir * missileSpeed;
+		
 		rb.velocity += -dir * speedChange;
 	}
 
