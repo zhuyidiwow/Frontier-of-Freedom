@@ -284,7 +284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4866814791531042}
   - component: {fileID: 135895074014476108}
-  - component: {fileID: 114381495061051716}
+  - component: {fileID: 114590046009669448}
   m_Layer: 0
   m_Name: Power up
   m_TagString: Untagged
@@ -3946,17 +3946,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   breakParticle: {fileID: 1343723894232812, guid: 15bb07bf0cc4b0c47b33bdf6e00d19e9,
     type: 2}
---- !u!114 &114381495061051716
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1283141985989714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5f7b1fc1501d504ba74243ff7f354d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114405429630350862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4087,6 +4076,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   breakParticle: {fileID: 1343723894232812, guid: 15bb07bf0cc4b0c47b33bdf6e00d19e9,
     type: 2}
+--- !u!114 &114590046009669448
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1283141985989714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 337ee92a632d492aa687bc20badfc752, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 0
 --- !u!114 &114605306949885336
 MonoBehaviour:
   m_ObjectHideFlags: 1
