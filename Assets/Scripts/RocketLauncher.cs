@@ -17,7 +17,12 @@ public class RocketLauncher : Weapon {
     private void UpdateUI() {
         rocketUI.SetActive(true);
         levelText.text = "Level " + Level;
-        countText.text = Count + "/" + targetCount;
+        if (Count == targetCount) {
+            countText.text = "Ready!";
+        } else {
+            countText.text = Count + "/" + targetCount;
+        }
+        
         slider.value = (float) Count / targetCount;
     }
 
