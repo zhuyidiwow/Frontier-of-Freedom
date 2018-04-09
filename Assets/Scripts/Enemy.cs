@@ -10,6 +10,7 @@ public class Enemy : Breakable {
 	public int Score;
 
 	public float Damage;
+	
 	[SerializeField] private float moveForce;
 	[SerializeField] private float maxSpeed;
 	

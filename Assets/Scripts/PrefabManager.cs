@@ -6,11 +6,14 @@ public class PrefabManager : MonoBehaviour {
 
     public Weapon MissileLauncher;
     public Enemy Enemy;
+    public Enemy Attacker;
     public Pickable WeaponPickable;
     public Pickable HealthPickable;
     public Pickable RocketPickable;
     public DeathZone DeathZone;
     public Rocket Rocket;
+    public EnemyBullet EnemyBullet;
+    
     
     
     private void Awake() {
