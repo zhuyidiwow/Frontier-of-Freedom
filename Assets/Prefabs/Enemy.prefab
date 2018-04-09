@@ -467,6 +467,7 @@ MonoBehaviour:
   breakParticle: {fileID: 1343723894232812, guid: 7438bb84c04a250478c52e0233ffb74c,
     type: 2}
   Score: 3
+  damage: 5
   moveForce: 4
   maxSpeed: 3
 --- !u!136 &136454377162231202

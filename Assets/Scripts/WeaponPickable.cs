@@ -26,6 +26,7 @@ public class WeaponPickable : Pickable {
                 break;
         }
         Player.Instance.PickUpWeapon(weapon);
+        Player.Instance.Heal(10f);
         Destroy(gameObject);
     }
 }

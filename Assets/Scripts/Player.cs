@@ -2,11 +2,18 @@
 using System.Collections.Generic;
 using System.Globalization;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 	public static Player Instance;
 	
+	[SerializeField] private Slider slider;
+	[SerializeField] private Image fill;
+	[SerializeField] private Color lowHealthColor;
+	[SerializeField] private Color fullHealthColor;
+	
 	[SerializeField] private float baseSpeedChange;
+	[SerializeField] private float maxHealth = 100f;
 	
 	private Rigidbody rb;
 	private Coroutine addForceCoroutine;
@@ -25,14 +32,21 @@ public class Player : MonoBehaviour {
 		if (health <= 0f) {
 			Die();
 		}
-		Debug.Log("Health: " + health);
+		UpdateUI();
 	}
 
 	public void Heal(float amount) {
 		health += amount;
-		if (health >= 100f) {
-			health = 100f;
+		if (health >= maxHealth) {
+			health = maxHealth;
 		}
+		UpdateUI();
+	}
+
+	private void UpdateUI() {
+		slider.value = health / maxHealth;
+
+		fill.color = Color.Lerp(lowHealthColor, fullHealthColor, health / maxHealth);
 	}
 	
 	private void Awake() {
@@ -44,6 +58,7 @@ public class Player : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		plane = new Plane(Vector3.back, transform.position);
 		weapons = new List<Weapon> {Instantiate(PrefabManager.Instance.MissileLauncher).GetComponent<Weapon>()};
+		UpdateUI();
 	}
 
 	private void Update() {

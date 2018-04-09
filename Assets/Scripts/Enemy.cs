@@ -2,29 +2,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Enemy : Breakable {
 
 	public int Score;
-	
+
+	[SerializeField] private float damage;
 	[SerializeField] private float moveForce;
 	[SerializeField] private float maxSpeed;
 	
 	private Player player;
 	private Rigidbody rb;
-	private bool shouldMove;
+	private bool justHurtPlayer;
 	
 	private void Start() {
 		player = Player.Instance;
 		rb = GetComponent<Rigidbody>();
 		maxSpeed *= Random.Range(0.5f, 1.5f);
 		StartCoroutine(DistanceCheck());
-		shouldMove = true;
 	}
 
 	private void FixedUpdate() {
-		if (shouldMove) {
+		if (!justHurtPlayer) {
 			MoveToPlayer();
 		}
 
@@ -50,17 +51,17 @@ public class Enemy : Breakable {
 	}
 
 	private void OnTriggerEnter(Collider other) {
-		if (other.CompareTag("Player")) {
-			shouldMove = false;
-			rb.velocity = (transform.position - player.transform.position).normalized * 12f;
+		if (other.CompareTag("Player") && !justHurtPlayer) {
+			justHurtPlayer = true;
+			rb.velocity = (transform.position - player.transform.position).normalized * 15f;
 			rb.drag = 5f;
-			Invoke("ContinueMoving", 3f);
-			player.TakeDamage(10f);
+			Invoke("ContinueMoving", 2f);
+			player.TakeDamage(damage);
 		}
 	}
 
 	private void ContinueMoving() {
-		shouldMove = true;
+		justHurtPlayer = false;
 		rb.drag = 0f;
 	}
 
