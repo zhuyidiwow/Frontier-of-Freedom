@@ -18,13 +18,15 @@ public class Player : MonoBehaviour {
 	private Rigidbody rb;
 	private Coroutine addForceCoroutine;
 	private Plane plane;
-	private List<Weapon> weapons;
+	private List<Weapon> baseWeapons;
+	private RocketLauncher rocketLauncher;
+	
 	private float health = 100f;
 
 	public void PickUpWeapon(Weapon newWeapon) {
 		newWeapon = Instantiate(newWeapon).GetComponent<Weapon>();
 		newWeapon.transform.parent = transform;
-		weapons.Add(newWeapon);
+		baseWeapons.Add(newWeapon);
 	}
 
 	public void TakeDamage(float amount) {
@@ -56,8 +58,10 @@ public class Player : MonoBehaviour {
 
 	void Start() {
 		rb = GetComponent<Rigidbody>();
+		rocketLauncher = GetComponent<RocketLauncher>();
+		
 		plane = new Plane(Vector3.back, transform.position);
-		weapons = new List<Weapon> {Instantiate(PrefabManager.Instance.MissileLauncher).GetComponent<Weapon>()};
+		baseWeapons = new List<Weapon> {Instantiate(PrefabManager.Instance.MissileLauncher).GetComponent<Weapon>()};
 		UpdateUI();
 	}
 
@@ -69,7 +73,7 @@ public class Player : MonoBehaviour {
 		Vector3 dir = mousePos - transform.position;
 		dir = dir.normalized;
 
-		int weaponCount = weapons.Count;
+		int weaponCount = baseWeapons.Count;
 		
 		Vector3 baseDir = Quaternion.AngleAxis(-45f, Vector3.back) * dir;
 		float angleStep = 90f / (weaponCount + 1);
@@ -78,16 +82,16 @@ public class Player : MonoBehaviour {
 		
 		for (int i = 0; i < weaponCount; i++) {
 			dirList.Add(Quaternion.AngleAxis(angleStep * (i + 1), Vector3.back) * baseDir);
-			Weapon weapon = weapons[i];
+			Weapon weapon = baseWeapons[i];
 			weapon.transform.position = 0.5f * dirList[i] + transform.position;
 			weapon.transform.LookAt(transform.position + dirList[i]);
 		}
 		
 		if (Input.GetMouseButtonDown(0)) {
 			for (int i = 0; i < weaponCount; i++) {
-				weapons[i].Shoot(dirList[i]);
+				baseWeapons[i].Shoot(dirList[i]);
 			}
-
+			rocketLauncher.Shoot(dir);
 			float speedChange = baseSpeedChange * Mathf.Sqrt(weaponCount);
 			rb.velocity += -dir * speedChange;
 		}

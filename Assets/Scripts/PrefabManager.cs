@@ -1,5 +1,4 @@
-﻿using DefaultNamespace;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class PrefabManager : MonoBehaviour {
@@ -9,6 +8,7 @@ public class PrefabManager : MonoBehaviour {
     public Enemy Enemy;
     public Pickable WeaponPickable;
     public Pickable HealthPickable;
+    public Pickable RocketPickable;
     public DeathZone DeathZone;
     public Rocket Rocket;
     
@@ -19,7 +19,7 @@ public class PrefabManager : MonoBehaviour {
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.T)) {
-            
+            Instantiate(Rocket, Player.Instance.transform.position, Quaternion.identity);
         }
     }
 }

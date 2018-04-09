@@ -52,8 +52,10 @@ public class Chunk : MonoBehaviour {
         if (Random.Range(0f, 1f) > 0.25f) {
             float rand = Random.Range(0f, 1f);
             Vector3 offset = new Vector3(Random.Range(horiMin, horiMax), Random.Range(verMin, verMax), 0f);
-            if (rand > 0.3f) {
+            if (rand > 0.5f) {
                 Instantiate(PrefabManager.Instance.WeaponPickable, transform.position + offset, Quaternion.identity, transform.Find("Items"));
+            } else if (rand > 0.25f) {
+                Instantiate(PrefabManager.Instance.RocketPickable, transform.position + offset, Quaternion.identity, transform.Find("Items"));
             } else {
                 Instantiate(PrefabManager.Instance.HealthPickable, transform.position + offset, Quaternion.identity, transform.Find("Items"));
             }

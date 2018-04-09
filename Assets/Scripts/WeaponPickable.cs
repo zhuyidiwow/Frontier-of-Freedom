@@ -4,23 +4,25 @@
 public class WeaponPickable : Pickable {
 
     public enum EWeapon {
-        MISSILE_LAUNCHER
+        MISSILE_LAUNCHER,
+        ROCKET_LAUNCHER
     }
 
     public EWeapon Type;
 
     protected override void OnPickUp() {
-        Weapon weapon;
         switch (Type) {
             case EWeapon.MISSILE_LAUNCHER:
-                weapon = PrefabManager.Instance.MissileLauncher;
+                Player.Instance.PickUpWeapon(PrefabManager.Instance.MissileLauncher);
+                break;
+            case EWeapon.ROCKET_LAUNCHER:
+                Player.Instance.GetComponent<RocketLauncher>().LevelUp();
                 break;
             default:
-                weapon = PrefabManager.Instance.MissileLauncher;
+                Debug.LogError("Error in weapon pickable");
                 break;
         }
-        Player.Instance.PickUpWeapon(weapon);
-        Player.Instance.Heal(healAmount);
+        
         Destroy(gameObject);
     }
 }

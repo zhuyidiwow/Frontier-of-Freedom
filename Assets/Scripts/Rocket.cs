@@ -29,7 +29,7 @@ public class Rocket : MonoBehaviour {
         }
     }
 
-    private void OnCollisionEnter(Collision other) {
+    private void OnTriggerEnter(Collider other) {
         GameObject otherObj = other.gameObject;
         
         if (otherObj.CompareTag("Breakable")) {
@@ -40,11 +40,14 @@ public class Rocket : MonoBehaviour {
             GameManager.Instance.Score(otherObj.GetComponent<Enemy>().Score);
             otherObj.GetComponent<Enemy>().Break();
             GameObject particle = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            
+            DeathZone deathZone = Instantiate(PrefabManager.Instance.DeathZone, transform.position, Quaternion.identity);
             Destroy(particle, 3f);
+            Destroy(deathZone.gameObject, 0.3f);
             Destroy(gameObject);
         }
 
-//        Instantiate(PrefabManager.Instance.DeathZone, transform.position, Quaternion.identity);
+        
         
     }
 }
