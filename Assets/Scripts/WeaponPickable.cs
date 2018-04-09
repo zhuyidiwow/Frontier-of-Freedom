@@ -4,7 +4,7 @@
 public class WeaponPickable : Pickable {
 
     public enum EWeapon {
-        MISSILE_LAUNCHER,
+        BULLET_LAUNCHER,
         ROCKET_LAUNCHER
     }
 
@@ -12,7 +12,7 @@ public class WeaponPickable : Pickable {
 
     protected override void OnPickUp() {
         switch (Type) {
-            case EWeapon.MISSILE_LAUNCHER:
+            case EWeapon.BULLET_LAUNCHER:
                 Player.Instance.PickUpWeapon(PrefabManager.Instance.MissileLauncher);
                 break;
             case EWeapon.ROCKET_LAUNCHER:

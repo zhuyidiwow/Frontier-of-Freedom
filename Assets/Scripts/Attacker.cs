@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 
 public class Attacker : Enemy {
@@ -8,45 +10,56 @@ public class Attacker : Enemy {
     public enum EEnemyMode {
         ATTACK, MOVE
     }
-    
-    [SerializeField] private float moveForce;
-    [SerializeField] private float maxSpeed;
+
+    public float ShootInterval;
+
+    [SerializeField] private float bulletSpeed;
     [SerializeField] private float stoppingDistance;
     [SerializeField] private float continueChasingDistance;
     
-    private Player player;
-    private Rigidbody rb;
     private EEnemyMode enemyMode;
+    private float lastShotTime;
     
     private void Start() {
         player = Player.Instance;
         rb = GetComponent<Rigidbody>();
         maxSpeed *= Random.Range(0.5f, 1.5f);
-        StartCoroutine(DistanceCheck());
+        StartCoroutine(SelfDestroyCheck());
+        enemyMode = EEnemyMode.MOVE;
     }
 
     private void FixedUpdate() {
+        float distance = Vector3.Distance(player.transform.position, transform.position);
+        
         switch (enemyMode) {
             case EEnemyMode.ATTACK:
+                ShootAtPlayer();
+                if (distance >= continueChasingDistance) {
+                    enemyMode = EEnemyMode.MOVE;
+                    rb.drag = 0f;
+                }
                 break;
             case EEnemyMode.MOVE:
+                MoveToPlayer();
+                if (distance <= stoppingDistance) {
+                    enemyMode = EEnemyMode.ATTACK;
+                    rb.drag = 10f;
+                }
                 break;
             default:
-                break;
-        }
-        
-        if (Vector3.Distance(player.transform.position, transform.position) > stoppingDistance) {
-            MoveToPlayer();    
-        }
-        else {
-            ShootAtPlayer();
+                throw new ArgumentOutOfRangeException();
         }
         
         transform.LookAt(player.transform.position);
     }
 
     private void ShootAtPlayer() {
-        
+        if (Time.time - lastShotTime > ShootInterval) {
+            lastShotTime = Time.time;
+            EnemyBullet enemyBullet = Instantiate(PrefabManager.Instance.EnemyBullet, transform.position + transform.forward * 0.5f,
+                Quaternion.identity);
+            enemyBullet.Initialize(Damage, bulletSpeed);
+        }
     }
     
     private void MoveToPlayer() {
@@ -62,10 +75,10 @@ public class Attacker : Enemy {
         }
     }
 
-    private IEnumerator DistanceCheck() {
+    private IEnumerator SelfDestroyCheck() {
         while (true) {
             if (Vector3.Distance(Player.Instance.transform.position, transform.position) > 50f) {
-                EnemyManager.Instance.SpawnOne();
+                EnemyManager.Instance.SpawnOne(PrefabManager.Instance.Attacker);
                 Break();
             }
 

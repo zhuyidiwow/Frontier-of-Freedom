@@ -11,11 +11,11 @@ public class Enemy : Breakable {
 
 	public float Damage;
 	
-	[SerializeField] private float moveForce;
-	[SerializeField] private float maxSpeed;
+	[SerializeField] protected float moveForce;
+	[SerializeField] protected float maxSpeed;
 	
-	private Player player;
-	private Rigidbody rb;
+	protected Player player;
+	protected Rigidbody rb;
 	private bool justHurtPlayer;
 	
 	private void Start() {

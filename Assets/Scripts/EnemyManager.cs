@@ -8,11 +8,11 @@ public class EnemyManager : MonoBehaviour {
 
     public int MaxEnemy;
     [HideInInspector] public List<Enemy> Enemies;
-    
+
     public bool ShouldSpawnEnemies() {
         return Enemies.Count < MaxEnemy;
     }
-    
+
     private void Awake() {
         if (Instance == null) Instance = this;
         Enemies = new List<Enemy>();
@@ -22,7 +22,7 @@ public class EnemyManager : MonoBehaviour {
         StartCoroutine(SpawnEnemyCoroutine());
     }
 
-    public void SpawnOne() {
+    public void SpawnOne(Enemy enemy = null) {
         Vector3 camPos = CameraManager.Instance.transform.position;
         camPos.z = 0f;
         Vector3 offset = new Vector3 {
@@ -32,7 +32,11 @@ public class EnemyManager : MonoBehaviour {
         };
         Vector3 pos = camPos + offset;
 
-        SpawnOne(pos);
+        if (enemy != null) {
+            SpawnOne(pos, enemy);
+        } else {
+            SpawnOne(pos, PrefabManager.Instance.Enemy);
+        }
     }
 
     public Enemy GetNearest(Vector3 pos) {
@@ -48,13 +52,13 @@ public class EnemyManager : MonoBehaviour {
 
         return Enemies[index];
     }
-    
-    public void SpawnOne(Vector3 pos) {
-        Enemy enemy = Instantiate(PrefabManager.Instance.Enemy, pos, Quaternion.identity, transform);
-        Enemies.Add(enemy);
+
+    public void SpawnOne(Vector3 pos, Enemy enemy) {
+        Enemy newEnemy = Instantiate(enemy, pos, Quaternion.identity, transform);
+        Enemies.Add(newEnemy);
         float scaleFactor = Random.Range(0.75f, 1.25f);
-        enemy.transform.localScale *= scaleFactor;
-        enemy.Damage *= scaleFactor;
+        newEnemy.transform.localScale *= scaleFactor;
+        newEnemy.Damage *= scaleFactor;
     }
 
     public void Delete(Enemy enemy) {
@@ -66,13 +70,16 @@ public class EnemyManager : MonoBehaviour {
     private IEnumerator SpawnEnemyCoroutine() {
         while (Application.isPlaying) {
             yield return new WaitForSeconds(3f);
-            
+
             while (ShouldSpawnEnemies()) {
-                SpawnOne();
+                if (Random.Range(0f, 1f) > 0.75f) {
+                    SpawnOne(PrefabManager.Instance.Attacker);
+                } else {
+                    SpawnOne();
+                }
+
                 yield return null;
             }
-            
-            
         }
     }
 }

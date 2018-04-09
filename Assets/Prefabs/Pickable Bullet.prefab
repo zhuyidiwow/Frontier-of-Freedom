@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 135313469348134626}
   - component: {fileID: 114235472245964372}
   m_Layer: 0
-  m_Name: Pickable Base Weapon
+  m_Name: Pickable Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

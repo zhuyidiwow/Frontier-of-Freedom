@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.24850416, g: 0.5310807, b: 0.8329177, a: 1}
+  m_IndirectSpecularColor: {r: 0.24849027, g: 0.5310723, b: 0.8329175, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1120,7 +1120,7 @@ MonoBehaviour:
   scoreText: {fileID: 1522765482}
   timerSlider: {fileID: 35245616}
   timerText: {fileID: 1774551665}
-  timerCap: 30
+  timerCap: 100
   Timer: 0
 --- !u!4 &627214122
 Transform:
@@ -1928,6 +1928,7 @@ MonoBehaviour:
   MissileLauncher: {fileID: 114198321217426660, guid: c613d005f1963534a9026f2c8f8f4273,
     type: 2}
   Enemy: {fileID: 114726970844616928, guid: 1cecaf463cdfca741bc11aceb40373cf, type: 2}
+  Attacker: {fileID: 114542265079138252, guid: 482e8efae18aae141af515f0a67ae450, type: 2}
   WeaponPickable: {fileID: 114235472245964372, guid: a38c05b82888ca5429c7d99b5ed35d75,
     type: 2}
   HealthPickable: {fileID: 114064620994776476, guid: ca1a9c153df9eaa4a93b3087e0c5ebee,
@@ -1937,6 +1938,8 @@ MonoBehaviour:
   DeathZone: {fileID: 114649434590411548, guid: 580101b7d719e7841a105bec50827958,
     type: 2}
   Rocket: {fileID: 114551240239505738, guid: 661b62330c0c8e84799a142dea1d411d, type: 2}
+  EnemyBullet: {fileID: 114365023684466876, guid: 8f81f960566e1f94b97b247cf859abc2,
+    type: 2}
 --- !u!4 &1527709334
 Transform:
   m_ObjectHideFlags: 0
