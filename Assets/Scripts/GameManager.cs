@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour {
 		scoreText.text = score.ToString();
 	}
 
+	public void EndGame() {
+		
+	}
+	
 	private void Awake() {
 		Instance = this;
 	}

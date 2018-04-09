@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
 	private Coroutine addForceCoroutine;
 	private Plane plane;
 	private List<Weapon> weapons;
+	private float health = 100f;
 
 	public void PickUpWeapon(Weapon newWeapon) {
 		newWeapon = Instantiate(newWeapon).GetComponent<Weapon>();
@@ -19,6 +20,21 @@ public class Player : MonoBehaviour {
 		weapons.Add(newWeapon);
 	}
 
+	public void TakeDamage(float amount) {
+		health -= amount;
+		if (health <= 0f) {
+			Die();
+		}
+		Debug.Log("Health: " + health);
+	}
+
+	public void Heal(float amount) {
+		health += amount;
+		if (health >= 100f) {
+			health = 100f;
+		}
+	}
+	
 	private void Awake() {
 		if (Instance == null) Instance = this;
 		else Destroy(Instance);
@@ -76,5 +92,9 @@ public class Player : MonoBehaviour {
 		}
 
 		addForceCoroutine = null;
+	}
+
+	private void Die() {
+		GameManager.Instance.EndGame();
 	}
 }

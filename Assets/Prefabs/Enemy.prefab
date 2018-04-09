@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 23275512501850430}
   - component: {fileID: 114726970844616928}
   - component: {fileID: 54330794545035178}
+  - component: {fileID: 65323344151940166}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -392,6 +393,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 8
   m_CollisionDetection: 0
+--- !u!65 &65323344151940166
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1050155766903038}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999994, y: 0.5172915, z: 1.1022574}
+  m_Center: {x: 0, y: -0.030676771, z: 1.0327835}
 --- !u!65 &65688060117875036
 BoxCollider:
   m_ObjectHideFlags: 1
