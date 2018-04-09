@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 
 public abstract class Pickable : MonoBehaviour {
+	[SerializeField] protected float healAmount;
+	
 	private void Update() {
 		transform.Rotate(Vector3.forward, 120f * Time.deltaTime);
 	}

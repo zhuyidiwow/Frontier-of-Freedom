@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void EndGame() {
-		Time.timeScale = 0f;
+		Time.timeScale = 0.1f;
 		endGameCanvas.SetActive(true);
 	}
 	

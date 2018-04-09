@@ -9,12 +9,6 @@ public class WeaponPickable : Pickable {
 
     public EWeapon Type;
 
-    private void Start() {
-        if (Random.Range(0f, 1f) < 0.5f) {
-            Destroy(gameObject);
-        }
-    }
-
     protected override void OnPickUp() {
         Weapon weapon;
         switch (Type) {
@@ -26,7 +20,7 @@ public class WeaponPickable : Pickable {
                 break;
         }
         Player.Instance.PickUpWeapon(weapon);
-        Player.Instance.Heal(10f);
+        Player.Instance.Heal(healAmount);
         Destroy(gameObject);
     }
 }

@@ -155,6 +155,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxEnemy: 30
   Enemies: []
+--- !u!1 &88434139
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 88434140}
+  - component: {fileID: 88434142}
+  - component: {fileID: 88434141}
+  m_Layer: 5
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &88434140
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 88434139}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1681876779}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -59.2, y: -8.9}
+  m_SizeDelta: {x: 1100.5, y: 620.1}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &88434141
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 88434139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+--- !u!222 &88434142
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 88434139}
 --- !u!1 &89181830
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,7 +828,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1681876779}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1241,6 +1309,10 @@ MonoBehaviour:
   MissileLauncher: {fileID: 114198321217426660, guid: c613d005f1963534a9026f2c8f8f4273,
     type: 2}
   Enemy: {fileID: 1050155766903038, guid: 1cecaf463cdfca741bc11aceb40373cf, type: 2}
+  WeaponPickable: {fileID: 114235472245964372, guid: a38c05b82888ca5429c7d99b5ed35d75,
+    type: 2}
+  HealthPickable: {fileID: 114064620994776476, guid: ca1a9c153df9eaa4a93b3087e0c5ebee,
+    type: 2}
 --- !u!4 &1527709334
 Transform:
   m_ObjectHideFlags: 0
@@ -1281,7 +1353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb82c541c5234903a18f9701198c8c73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Threshold: 10
+  Threshold: 13
   ChunkPrefab: {fileID: 1313156388502320, guid: 6d8818a7b27748d44bce41affebdb8c8,
     type: 2}
   AverageEnemy: 5
@@ -1318,7 +1390,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1681876779
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1329,6 +1401,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 88434140}
   - {fileID: 842056964}
   m_Father: {fileID: 953683569}
   m_RootOrder: 2
