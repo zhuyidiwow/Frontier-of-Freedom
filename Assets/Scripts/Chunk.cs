@@ -65,9 +65,7 @@ public class Chunk : MonoBehaviour {
 
         for (int i = 0; i < enemyCount; i++) {
             Vector3 offset = new Vector3(Random.Range(horiMin, horiMax), Random.Range(verMin, verMax), 0f);
-            GameObject enemy = Instantiate(PrefabManager.Instance.Enemy, transform.position + offset, Quaternion.identity,
-                EnemyManager.Instance.transform);
-            EnemyManager.Instance.Enemies.Add(enemy.GetComponent<Enemy>());
+            EnemyManager.Instance.SpawnOne(transform.position + offset);
         }
     }
 

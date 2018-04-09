@@ -31,8 +31,13 @@ public class EnemyManager : MonoBehaviour {
         };
         Vector3 pos = camPos + offset;
 
+        SpawnOne(pos);
+    }
+    
+    public void SpawnOne(Vector3 pos) {
         GameObject enemy = Instantiate(PrefabManager.Instance.Enemy, pos, Quaternion.identity, transform);
         Enemies.Add(enemy.GetComponent<Enemy>());
+        enemy.transform.localScale *= Random.Range(0.75f, 1.25f);
     }
 
     public void Delete(Enemy enemy) {
