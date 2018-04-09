@@ -9,7 +9,7 @@ public class Enemy : Breakable {
 
 	public int Score;
 
-	[SerializeField] private float damage;
+	public float Damage;
 	[SerializeField] private float moveForce;
 	[SerializeField] private float maxSpeed;
 	
@@ -56,7 +56,7 @@ public class Enemy : Breakable {
 			rb.velocity = (transform.position - player.transform.position).normalized * 15f;
 			rb.drag = 5f;
 			Invoke("ContinueMoving", 2f);
-			player.TakeDamage(damage);
+			player.TakeDamage(Damage);
 		}
 	}
 

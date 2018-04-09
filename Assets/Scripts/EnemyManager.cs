@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Comparers;
 
 public class EnemyManager : MonoBehaviour {
     public static EnemyManager Instance;
@@ -33,11 +34,27 @@ public class EnemyManager : MonoBehaviour {
 
         SpawnOne(pos);
     }
+
+    public Enemy GetNearest(Vector3 pos) {
+        int index = 0;
+        float shortestDis = 100f;
+        for (int i = 0; i < Enemies.Count; i++) {
+            float distance = Vector3.Distance(Enemies[i].transform.position, pos);
+            if (distance < shortestDis) {
+                shortestDis = distance;
+                index = i;
+            }
+        }
+
+        return Enemies[index];
+    }
     
     public void SpawnOne(Vector3 pos) {
-        GameObject enemy = Instantiate(PrefabManager.Instance.Enemy, pos, Quaternion.identity, transform);
-        Enemies.Add(enemy.GetComponent<Enemy>());
-        enemy.transform.localScale *= Random.Range(0.75f, 1.25f);
+        Enemy enemy = Instantiate(PrefabManager.Instance.Enemy, pos, Quaternion.identity, transform);
+        Enemies.Add(enemy);
+        float scaleFactor = Random.Range(0.75f, 1.25f);
+        enemy.transform.localScale *= scaleFactor;
+        enemy.Damage *= scaleFactor;
     }
 
     public void Delete(Enemy enemy) {
