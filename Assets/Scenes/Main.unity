@@ -804,7 +804,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 214544079}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -1419,7 +1419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b155fbce19a9c4c82ac127268ebc5e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OffsetMultiplier: 2
+  OffsetMultiplier: 3
   ViewRange: {x: 0, y: 0}
 --- !u!114 &1121270725
 MonoBehaviour:
@@ -1631,19 +1631,19 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_Font: {fileID: 12800000, guid: 8daa68f2059a8dd41a090f316c96ba28, type: 3}
+    m_FontSize: 72
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
-    m_MaxSize: 60
-    m_Alignment: 0
+    m_MaxSize: 72
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 'Powerup: 0'
+  m_Text: 0
 --- !u!222 &1522765483
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1663,11 +1663,11 @@ RectTransform:
   m_Father: {fileID: 953683569}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -100}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -100, y: 100}
   m_SizeDelta: {x: 300, y: 100}
-  m_Pivot: {x: 0, y: 1}
+  m_Pivot: {x: 1, y: 0}
 --- !u!1 &1527709332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1701,6 +1701,8 @@ MonoBehaviour:
   WeaponPickable: {fileID: 114235472245964372, guid: a38c05b82888ca5429c7d99b5ed35d75,
     type: 2}
   HealthPickable: {fileID: 114064620994776476, guid: ca1a9c153df9eaa4a93b3087e0c5ebee,
+    type: 2}
+  RocketPickable: {fileID: 114235472245964372, guid: b233783dcf73b874c8fd8d046d4f92ad,
     type: 2}
   DeathZone: {fileID: 114649434590411548, guid: 580101b7d719e7841a105bec50827958,
     type: 2}
