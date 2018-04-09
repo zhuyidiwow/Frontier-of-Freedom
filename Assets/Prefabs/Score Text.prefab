@@ -196,9 +196,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3d2f78539bc4d34b9aef2678e259289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravity: 12
+  gravity: 0
   lifeTime: 1
-  baseSpeed: 4
+  baseSpeed: 2
 --- !u!222 &222973477063739986
 CanvasRenderer:
   m_ObjectHideFlags: 1

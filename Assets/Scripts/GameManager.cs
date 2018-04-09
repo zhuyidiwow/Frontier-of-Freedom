@@ -43,13 +43,13 @@ public class GameManager : MonoBehaviour {
         Timer = timerCap;
     }
 
-    private void Update() {
-        Timer -= Time.deltaTime;
-        if (Timer <= 0f) {
-            EndGame();
-        }
-        UpdateTimerUI();
-    }
+//    private void Update() {
+//        Timer -= Time.deltaTime;
+//        if (Timer <= 0f) {
+//            EndGame();
+//        }
+//        UpdateTimerUI();
+//    }
 
     private void UpdateTimerUI() {
         timerSlider.value = Timer / timerCap;
