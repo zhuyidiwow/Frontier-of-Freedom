@@ -16,7 +16,7 @@ public class RocketLauncher : Weapon {
 
     private void UpdateUI() {
         rocketUI.SetActive(true);
-        levelText.text = "Level " + Level;
+        levelText.text = "Rocket lv. " + Level;
         if (Count == targetCount) {
             countText.text = "Ready!";
         } else {

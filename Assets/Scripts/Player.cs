@@ -59,7 +59,6 @@ public class Player : MonoBehaviour {
 
     private void UpdateUI() {
         slider.value = health / maxHealth;
-
         fill.color = Color.Lerp(lowHealthColor, fullHealthColor, health / maxHealth);
     }
 
@@ -107,6 +106,10 @@ public class Player : MonoBehaviour {
             rocketLauncher.Shoot(dir);
             float speedChange = baseSpeedChange * Mathf.Sqrt(weaponCount);
             rb.velocity += -dir * speedChange;
+        }
+
+        if (rb.velocity.magnitude > 20f) {
+            rb.velocity = rb.velocity.normalized * 20f;
         }
     }
 

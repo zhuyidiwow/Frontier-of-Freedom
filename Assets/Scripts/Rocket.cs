@@ -49,7 +49,13 @@ public class Rocket : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        
+        if (otherObj.CompareTag("Boss")) {
+            GameObject particle = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            DeathZone deathZone = Instantiate(PrefabManager.Instance.DeathZone, transform.position, Quaternion.identity);
+            Destroy(particle, 3f);
+            Destroy(deathZone.gameObject, 0.3f);
+            Destroy(gameObject);
+        }
         
     }
 }

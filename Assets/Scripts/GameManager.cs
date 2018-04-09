@@ -10,18 +10,26 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private GameObject endGameCanvas;
     [SerializeField] private Text scoreText;
 
-    [Header("Timer")]
-    [SerializeField] private Slider timerSlider;
+    [Header("Timer")] [SerializeField] private Slider timerSlider;
     [SerializeField] private Text timerText;
     [SerializeField] private float timerCap;
-    
+
     [HideInInspector] public float Timer;
-    
+
     private int score;
+
+    private bool isBoss;
 
     public void Score(int amount) {
         score += amount;
         scoreText.text = score.ToString();
+
+        if (score > 50f && !isBoss) {
+            isBoss = true;
+            Instantiate(PrefabManager.Instance.Boss,
+                Player.Instance.transform.position + new Vector3(CameraManager.Instance.ViewRange.x, CameraManager.Instance.ViewRange.y, 0f),
+                Quaternion.identity);
+        }
     }
 
     public void PickExtraTime(float amount) {

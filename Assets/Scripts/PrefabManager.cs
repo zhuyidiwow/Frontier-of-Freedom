@@ -14,6 +14,7 @@ public class PrefabManager : MonoBehaviour {
     public Rocket Rocket;
     public EnemyBullet EnemyBullet;
     public ScoreText ScoreText;
+    public Boss Boss;
     
     
     private void Awake() {

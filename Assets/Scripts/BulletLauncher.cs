@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class MissileLauncher : Weapon {
+public class BulletLauncher : Weapon {
     [SerializeField] private float missileSpeed;
     [SerializeField] private GameObject missilePrefab;
     
