@@ -1,27 +1,26 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 
 public class ScoreText : MonoBehaviour {
 
-    private Text text;
     [SerializeField] private float gravity;
     [SerializeField] private float lifeTime;
-    [SerializeField] private float baseScale;
+    private float baseScale;
     [SerializeField] private float baseSpeed;
     
     private Vector3 velocity;
     private bool isInitialized;
     private float startTime;
     
-    public void Initialize(float value, Vector3 initialDir, Vector3 position) {
-        GetComponent<RectTransform>().position = position;
-        text = GetComponent<Text>();
-        text.text = "+" + value + "!";
-        transform.GetChild(0).GetComponent<Text>().text = text.text;
+    public void Initialize(float value, Vector3 initialDir, Vector3 pos) {
+        GetComponent<RectTransform>().position = pos;
+        GetComponent<TextMeshPro>().text = "+" + value + "!";
         velocity = initialDir * baseSpeed;
         isInitialized = true;
         startTime = Time.time;
+        baseScale = value / 3f;
     }
 
     private void Update() {

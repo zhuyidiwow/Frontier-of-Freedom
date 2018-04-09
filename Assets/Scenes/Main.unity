@@ -1942,7 +1942,7 @@ MonoBehaviour:
   Rocket: {fileID: 114551240239505738, guid: 661b62330c0c8e84799a142dea1d411d, type: 2}
   EnemyBullet: {fileID: 114365023684466876, guid: 8f81f960566e1f94b97b247cf859abc2,
     type: 2}
-  ScoreText: {fileID: 114828501157646028, guid: d95357829315f3a47855638f11d02f4a,
+  ScoreText: {fileID: 114537132024404074, guid: 5e62aea37b4eed74b9fc31af171a6e0c,
     type: 2}
 --- !u!4 &1527709334
 Transform:

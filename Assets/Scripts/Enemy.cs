@@ -48,14 +48,11 @@ public class Enemy : Breakable {
 	public override void Break() {
 		base.Break();
 		EnemyManager.Instance.Delete(this);
-		
-		Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);		
-		pos.x *= CameraManager.Instance.ScreenSize.x;
-		pos.y *= CameraManager.Instance.ScreenSize.y;
-		
-		ScoreText text = Instantiate(PrefabManager.Instance.ScoreText, pos, Quaternion.identity, GameManager.Instance.Canvas.transform);
-		
-		text.Initialize(Score, (Vector3.up + Vector3.right).normalized, pos); 
+
+		Vector3 pos = transform.position;
+		Vector3 dir = (pos - player.transform.position).normalized;
+		ScoreText text = Instantiate(PrefabManager.Instance.ScoreText, pos, Quaternion.identity);
+		text.Initialize(Score, dir, pos); 
 	}
 
 	private void OnTriggerEnter(Collider other) {
