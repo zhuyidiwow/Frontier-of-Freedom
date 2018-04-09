@@ -5,7 +5,9 @@ using UnityEngine;
 public class Rocket : MonoBehaviour {
 
     [SerializeField] private GameObject explosionPrefab;
-
+    [SerializeField] private float speedCap;
+    [SerializeField] private float moveForce;
+    
     private Enemy target;
     private Rigidbody rb;
     
@@ -18,14 +20,14 @@ public class Rocket : MonoBehaviour {
         if (target == null) {
             target = EnemyManager.Instance.GetNearest(transform.position);
         }
-        rb.AddForce( (target.transform.position - transform.position).normalized * 6f);
+        rb.AddForce( (target.transform.position - transform.position).normalized * moveForce);
         CapSpeed();
         transform.LookAt(transform.position + rb.velocity);
     }
 
     private void CapSpeed() {
-        if (rb.velocity.magnitude > 20f) {
-            rb.velocity = rb.velocity.normalized * 20f;
+        if (rb.velocity.magnitude > speedCap) {
+            rb.velocity = rb.velocity.normalized * speedCap;
         }
     }
 

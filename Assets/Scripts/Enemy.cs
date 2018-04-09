@@ -8,7 +8,6 @@ using Random = UnityEngine.Random;
 public class Enemy : Breakable {
 
 	public int Score;
-
 	public float Damage;
 	
 	[SerializeField] protected float moveForce;
@@ -49,6 +48,14 @@ public class Enemy : Breakable {
 	public override void Break() {
 		base.Break();
 		EnemyManager.Instance.Delete(this);
+		
+		Vector3 pos = Camera.main.WorldToViewportPoint(transform.position);		
+		pos.x *= CameraManager.Instance.ScreenSize.x;
+		pos.y *= CameraManager.Instance.ScreenSize.y;
+		
+		ScoreText text = Instantiate(PrefabManager.Instance.ScoreText, pos, Quaternion.identity, GameManager.Instance.Canvas.transform);
+		
+		text.Initialize(Score, (Vector3.up + Vector3.right).normalized, pos); 
 	}
 
 	private void OnTriggerEnter(Collider other) {

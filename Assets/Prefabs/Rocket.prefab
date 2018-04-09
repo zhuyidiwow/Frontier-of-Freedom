@@ -144,6 +144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionPrefab: {fileID: 1343723894232812, guid: f53e4a73192e86c4cad10990010bd535,
     type: 2}
+  speedCap: 20
+  moveForce: 10
 --- !u!136 &136089504798083944
 CapsuleCollider:
   m_ObjectHideFlags: 1

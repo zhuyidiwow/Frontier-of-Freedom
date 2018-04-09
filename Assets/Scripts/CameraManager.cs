@@ -8,12 +8,16 @@ public class CameraManager : MonoBehaviour {
 	public float OffsetMultiplier;
 
 	[HideInInspector] public Vector2 ViewRange;
+	[HideInInspector] public Vector2 ScreenSize;
+	
 	private Vector3 offset;
 	private Player player;
 	
 	private void Awake() {
 		if (Instance == null) Instance = this;
 		ViewRange = Camera.main.ViewportToWorldPoint(new Vector3(1f, 1f, 14.13f)) - Camera.main.ViewportToWorldPoint(new Vector3(0f, 0f, 14.13f));
+		ScreenSize = Camera.main.ViewportToScreenPoint(new Vector3(1f, 1f, 14.13f)) - Camera.main.ViewportToScreenPoint(new Vector3(0f, 0f, 14.13f));
+		
 	}
 	
 	private void Start() {

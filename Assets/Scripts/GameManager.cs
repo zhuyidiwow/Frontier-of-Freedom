@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
     public static GameManager Instance;
 
+    public GameObject Canvas;
     [SerializeField] private GameObject endGameCanvas;
     [SerializeField] private Text scoreText;
 

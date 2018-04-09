@@ -13,7 +13,7 @@ public class PrefabManager : MonoBehaviour {
     public DeathZone DeathZone;
     public Rocket Rocket;
     public EnemyBullet EnemyBullet;
-    
+    public ScoreText ScoreText;
     
     
     private void Awake() {
