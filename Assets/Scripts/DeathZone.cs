@@ -3,6 +3,7 @@
 
 public class DeathZone : MonoBehaviour {
     [SerializeField] private float damage;
+    private bool hasHitBoss = false;
     
     private void OnTriggerStay(Collider other) {
         if (other.CompareTag("Breakable")) {
@@ -15,7 +16,10 @@ public class DeathZone : MonoBehaviour {
         }
 
         if (other.CompareTag("Boss")) {
-            other.GetComponent<Boss>().TakeDamage(damage);
+            if (!hasHitBoss) {
+                other.GetComponent<Boss>().TakeDamage(damage);
+                hasHitBoss = true;
+            }
         }
         
         

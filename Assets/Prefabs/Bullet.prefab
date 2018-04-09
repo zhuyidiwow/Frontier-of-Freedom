@@ -205,6 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded98f61c9566cf4fbff01e590d82a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 3
   particlePrefab: {fileID: 1343723894232812, guid: e2890c5b548a82943bb0689b73368955,
     type: 2}
 --- !u!135 &135636729828533692

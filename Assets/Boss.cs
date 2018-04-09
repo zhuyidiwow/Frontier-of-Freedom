@@ -33,6 +33,7 @@ public class Boss : MonoBehaviour {
 			Spike spike = spikes[0];
 			spikes.RemoveAt(0);
 			spike.transform.parent = null;
+			Destroy(spike.gameObject);
 		}
 	}
 
@@ -50,6 +51,7 @@ public class Boss : MonoBehaviour {
 		}
 
 		spikeCount = spikes.Count;
+		TakeDamage(0f);
 	}
 
 	private void Update() {
