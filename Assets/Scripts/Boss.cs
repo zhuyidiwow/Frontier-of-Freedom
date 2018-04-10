@@ -100,7 +100,7 @@ public class Boss : MonoBehaviour {
 		
 		radius = baseRadius * scaleFactor;
 		moveForce = moveForce * scaleFactor;
-		speedCap = speedCap * scaleFactor;
+		speedCap = speedCap * Mathf.Clamp(scaleFactor, 1f, 1.5f);
 		health = health * scaleFactor;
 		transform.localScale *= scaleFactor;
 	}

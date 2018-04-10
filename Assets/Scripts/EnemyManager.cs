@@ -70,7 +70,7 @@ public class EnemyManager : MonoBehaviour {
 
             while (ShouldSpawnEnemies()) {
                 float attackerRate = (Mathf.Pow(DifficultyManager.Instance.Difficulty, 0.5f) - 1f);
-                if (attackerRate > 0.75f) attackerRate = 0.75f;
+                if (attackerRate > 0.5f) attackerRate = 0.5f;
                 
                 if (Random.Range(0f, 1f) > attackerRate) {
                     SpawnOne();

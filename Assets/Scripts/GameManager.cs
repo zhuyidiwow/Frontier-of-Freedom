@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour {
                 Player.Instance.transform.position + new Vector3(CameraManager.Instance.ViewRange.x, CameraManager.Instance.ViewRange.y, 0f),
                 Quaternion.identity);
             count++;
-            waitScore += 100 * count;
+            waitScore += 100 * (count + 2);
         }
     }
 }
