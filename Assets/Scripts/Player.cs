@@ -9,10 +9,12 @@ public class Player : MonoBehaviour {
 
     [SerializeField] private Color normalColor;
     [SerializeField] private Color hitColor;
-    
+
     [SerializeField] private Color normalEmissionColor;
-    [SerializeField] [ColorUsageAttribute(true, true, 0.5f, 3f, 0f, 1f)] private Color hitEmissionColor;
-    
+
+    [SerializeField] [ColorUsageAttribute(true, true, 0.5f, 3f, 0f, 1f)]
+    private Color hitEmissionColor;
+
     [SerializeField] private Slider slider;
     [SerializeField] private Image fill;
     [SerializeField] private Color lowHealthColor;
@@ -108,9 +110,10 @@ public class Player : MonoBehaviour {
             rb.velocity += -dir * speedChange;
         }
 
-//        if (rb.velocity.magnitude > 20f) {
-//            rb.velocity = rb.velocity.normalized * 30f * DifficultyManager.Instance.Difficulty;
-//        }
+        float speedCap = Mathf.Pow(DifficultyManager.Instance.Difficulty, 0.33f) * 15f;
+        if (rb.velocity.magnitude > speedCap) {
+            rb.velocity = rb.velocity.normalized * speedCap;
+        }
     }
 
     private void AddForce(Vector3 force, float duration) {
@@ -137,9 +140,10 @@ public class Player : MonoBehaviour {
         float elapsedTime = 0f;
         float duration = 0.2f;
         Material material = GetComponent<Renderer>().material;
-        
+
         while (elapsedTime < duration) {
-            material.SetColor("_EmissionColor", Color.Lerp(material.GetColor("_EmissionColor"), hitEmissionColor, Mathf.Pow(elapsedTime / duration, 2f)));
+            material.SetColor("_EmissionColor",
+                Color.Lerp(material.GetColor("_EmissionColor"), hitEmissionColor, Mathf.Pow(elapsedTime / duration, 2f)));
             material.SetColor("_Color", Color.Lerp(material.GetColor("_Color"), hitColor, Mathf.Pow(elapsedTime / duration, 2f)));
             yield return null;
             elapsedTime += Time.deltaTime;
@@ -147,7 +151,8 @@ public class Player : MonoBehaviour {
 
         elapsedTime = 0f;
         while (elapsedTime < duration) {
-            material.SetColor("_EmissionColor", Color.Lerp(material.GetColor("_EmissionColor"), normalEmissionColor, Mathf.Pow(elapsedTime / duration, 2f)));
+            material.SetColor("_EmissionColor",
+                Color.Lerp(material.GetColor("_EmissionColor"), normalEmissionColor, Mathf.Pow(elapsedTime / duration, 2f)));
             material.SetColor("_Color", Color.Lerp(material.GetColor("_Color"), normalColor, Mathf.Pow(elapsedTime / duration, 2f)));
             yield return null;
             elapsedTime += Time.deltaTime;

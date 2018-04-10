@@ -5,7 +5,7 @@ using UnityEngine;
 public class DifficultyManager : MonoBehaviour {
     public static DifficultyManager Instance;
 
-    public float Difficulty;
+    [HideInInspector] public float Difficulty;
     public float DropPerMinute;
     public float ScoreBase;
     public float ScorePower;
@@ -29,6 +29,7 @@ public class DifficultyManager : MonoBehaviour {
     private void Update() {
         timeModifier = -dropPerSec * (Time.time - startTime);
         scoreModifier = Mathf.Pow(GameManager.Instance.Score / ScoreBase, ScorePower);
+
         Difficulty = 1f + timeModifier + scoreModifier;
         Debug.Log(Difficulty);
     }

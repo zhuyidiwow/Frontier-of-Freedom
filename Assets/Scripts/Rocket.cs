@@ -13,6 +13,9 @@ public class Rocket : MonoBehaviour {
     
     private void Start() {
         target = EnemyManager.Instance.GetNearest(transform.position);
+        if (target == null) {
+            Explode();
+        }
         rb = GetComponent<Rigidbody>();
     }
 
@@ -41,21 +44,20 @@ public class Rocket : MonoBehaviour {
         if (otherObj.CompareTag("Enemy")) {
             GameManager.Instance.GetScore(otherObj.GetComponent<Enemy>().Score);
             otherObj.GetComponent<Enemy>().Break();
-            GameObject particle = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            
-            DeathZone deathZone = Instantiate(PrefabManager.Instance.DeathZone, transform.position, Quaternion.identity);
-            Destroy(particle, 3f);
-            Destroy(deathZone.gameObject, 0.3f);
-            Destroy(gameObject);
+            Explode();
         }
 
         if (otherObj.CompareTag("Boss")) {
-            GameObject particle = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-            DeathZone deathZone = Instantiate(PrefabManager.Instance.DeathZone, transform.position, Quaternion.identity);
-            Destroy(particle, 3f);
-            Destroy(deathZone.gameObject, 0.3f);
-            Destroy(gameObject);
+            Explode();
         }
         
+    }
+
+    private void Explode() {
+        GameObject particle = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        DeathZone deathZone = Instantiate(PrefabManager.Instance.DeathZone, transform.position, Quaternion.identity);
+        Destroy(particle, 3f);
+        Destroy(deathZone.gameObject, 0.3f);
+        Destroy(gameObject);
     }
 }

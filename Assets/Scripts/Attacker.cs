@@ -29,6 +29,7 @@ public class Attacker : Enemy {
         StartCoroutine(SelfDestroyCheck());
         enemyMode = EEnemyMode.MOVE;
         originalWeaponScale = weapon.transform.localScale;
+        weapon.transform.localScale = originalWeaponScale * 2f;
     }
 
     private void FixedUpdate() {

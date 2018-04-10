@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
 
     [HideInInspector] public float Timer;
 
-    [HideInInspector] public int Score;
+    [HideInInspector] public int Score = 0;
     private bool isRunning;
     
     public void GetScore(int amount) {
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour {
             Instantiate(PrefabManager.Instance.Boss,
                 Player.Instance.transform.position + new Vector3(CameraManager.Instance.ViewRange.x, CameraManager.Instance.ViewRange.y, 0f),
                 Quaternion.identity);
-            
+            count++;
         }
     }
 }
