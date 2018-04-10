@@ -70,13 +70,18 @@ public class Chunk : MonoBehaviour {
 
     private void SpawnEnemies() {
         int enemyCount = chunkManager.AverageEnemy;
+        StartCoroutine(SpawnEnemyCoroutine(enemyCount));
 
-        for (int i = 0; i < enemyCount; i++) {
-            Vector3 offset = new Vector3(Random.Range(horiMin, horiMax), Random.Range(verMin, verMax), 0f);
-            EnemyManager.Instance.SpawnOne(transform.position + offset, PrefabManager.Instance.Enemy);
-        }
     }
 
+    private IEnumerator SpawnEnemyCoroutine(int count) {
+        for (int i = 0; i < count; i++) {
+            Vector3 offset = new Vector3(Random.Range(horiMin, horiMax), Random.Range(verMin, verMax), 0f);
+            EnemyManager.Instance.SpawnOne(transform.position + offset, PrefabManager.Instance.Enemy);
+            yield return new WaitForSeconds(0.067f);
+        }
+    }
+    
     private void Update() {
         if (player.position.x < rightBound &&
             player.position.x > leftBound &&

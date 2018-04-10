@@ -56,9 +56,6 @@ public class EnemyManager : MonoBehaviour {
     public void SpawnOne(Vector3 pos, Enemy enemy) {
         Enemy newEnemy = Instantiate(enemy, pos, Quaternion.identity, transform);
         Enemies.Add(newEnemy);
-        float scaleFactor = Random.Range(0.75f, 1.25f);
-        newEnemy.transform.localScale *= scaleFactor;
-        newEnemy.Damage *= scaleFactor;
     }
 
     public void Delete(Enemy enemy) {
