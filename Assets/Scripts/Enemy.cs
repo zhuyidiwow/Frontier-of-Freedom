@@ -12,6 +12,7 @@ public class Enemy : Breakable {
 	
 	[SerializeField] protected float moveForce;
 	[SerializeField] protected float maxSpeed;
+	[SerializeField] protected GameObject trail;
 	
 	protected Player player;
 	protected Rigidbody rb;
@@ -58,7 +59,8 @@ public class Enemy : Breakable {
 	private void OnTriggerEnter(Collider other) {
 		if (other.CompareTag("Player") && !justHurtPlayer) {
 			justHurtPlayer = true;
-			rb.velocity = (transform.position - player.transform.position).normalized * 15f;
+			float speed = player.GetComponent<Rigidbody>().velocity.magnitude > 15f ? player.GetComponent<Rigidbody>().velocity.magnitude + 5f : 15f;
+			rb.velocity = (transform.position - player.transform.position).normalized * speed;
 			rb.drag = 5f;
 			Invoke("ContinueMoving", 2f);
 			player.TakeDamage(Damage);

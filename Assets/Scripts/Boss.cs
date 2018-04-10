@@ -14,14 +14,20 @@ public class Boss : MonoBehaviour {
 	[SerializeField] private float moveForce;
 	[SerializeField] private float speedCap;
 	[SerializeField] private float rotationSpeed;
+	[SerializeField] private GameObject dieParticle;
 	
 	private float health;
 	private Rigidbody rb;
 	private List<Spike> spikes;
 	private int spikeCount;
 	private bool justHitPlayer;
+	private float baseRadius = 1.73f;
+	private float radius;
+	private float scaleFactor;
+	private bool isDead;
 	
 	public void TakeDamage(float amount) {
+		if (isDead) return;
 		health -= amount;
 		if (health <= 0f) {
 			Die();	
@@ -39,6 +45,27 @@ public class Boss : MonoBehaviour {
 	}
 
 	private void Die() {
+		StartCoroutine(DieCoroutine());
+	}
+
+	private IEnumerator DieCoroutine() {
+		isDead = true;
+		healthSlider.gameObject.SetActive(false);
+		rb.isKinematic = true;
+		rb.velocity = Vector3.one;
+		GetComponent<Collider>().enabled = false;
+		
+		float startTime = Time.time;
+
+		float blowCount = 12f;
+		int i = 0;
+		float step = 2f / blowCount;
+		while (Time.time - startTime < 2f) {
+			yield return new WaitUntil(() => Time.time - startTime > step * i);
+			SpawnOneParticle();
+			i++;
+		}
+		SpawnOneParticle();SpawnOneParticle();SpawnOneParticle();
 		int score = (int) (50 * DifficultyManager.Instance.Difficulty);
 		if (score > 100) score = 100;
 		
@@ -49,6 +76,12 @@ public class Boss : MonoBehaviour {
 		
 		GameManager.Instance.GetScore(score);
 		Destroy(gameObject);
+	}
+
+	void SpawnOneParticle() {
+		GameObject particle = Instantiate(dieParticle, transform.position + new Vector3(Random.Range(-radius, radius), Random.Range(-radius, radius)),
+			Quaternion.identity);
+		Destroy(particle, 3f);
 	}
 	
 	private void Start() {
@@ -62,9 +95,19 @@ public class Boss : MonoBehaviour {
 
 		spikeCount = spikes.Count;
 		TakeDamage(0f);
+
+		scaleFactor = Mathf.Pow(DifficultyManager.Instance.Difficulty, 0.4f);
+		
+		radius = baseRadius * scaleFactor;
+		moveForce = moveForce * scaleFactor;
+		speedCap = speedCap * scaleFactor;
+		health = health * scaleFactor;
+		transform.localScale *= scaleFactor;
 	}
 
 	private void Update() {
+		if (isDead) return;
+		
 		float distance = (Player.Instance.transform.position - transform.position).magnitude;
 		float actualRotateSpeed = rotationSpeed;
 		if (distance < 10f) {
@@ -83,6 +126,7 @@ public class Boss : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider other) {
+		if (isDead) return;
 		if (other.CompareTag("Breakable")) {
 			other.GetComponent<Breakable>().Break();
 		}
