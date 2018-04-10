@@ -30,6 +30,18 @@ public class Attacker : Enemy {
         enemyMode = EEnemyMode.MOVE;
         originalWeaponScale = weapon.transform.localScale;
         weapon.transform.localScale = originalWeaponScale * 2f;
+        
+        float randomFactor = Random.Range(0.75f, 1.5f);
+        float difficulty = Mathf.Pow(DifficultyManager.Instance.Difficulty, 0.5f);
+        moveForce = moveForce * difficulty;
+        maxSpeed = maxSpeed * difficulty * randomFactor;
+        Score = (int) (Score * difficulty);
+        Damage = Damage * difficulty * randomFactor;
+
+        bulletSpeed = bulletSpeed * difficulty * randomFactor;
+        ShootInterval = ShootInterval / difficulty;
+        stoppingDistance = stoppingDistance * difficulty;
+        if (stoppingDistance > 10f) stoppingDistance = 10f;
     }
 
     private void FixedUpdate() {

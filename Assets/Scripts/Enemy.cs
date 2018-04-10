@@ -22,6 +22,7 @@ public class Enemy : Breakable {
 		player = Player.Instance;
 		rb = GetComponent<Rigidbody>();
 		StartCoroutine(DistanceCheck());
+		
 		float randomFactor = Random.Range(0.75f, 1.5f);
 		float difficulty = Mathf.Pow(DifficultyManager.Instance.Difficulty, 0.5f);
 		moveForce = moveForce * difficulty;
