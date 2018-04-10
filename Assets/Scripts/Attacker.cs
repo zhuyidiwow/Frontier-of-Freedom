@@ -43,6 +43,7 @@ public class Attacker : Enemy {
         ShootInterval = ShootInterval / difficulty;
         stoppingDistance = stoppingDistance * difficulty;
         if (stoppingDistance > 10f) stoppingDistance = 10f;
+        trail.SetActive(difficulty > 1.5f);
         
     }
 
@@ -102,7 +103,9 @@ public class Attacker : Enemy {
         while (true) {
             if (Vector3.Distance(Player.Instance.transform.position, transform.position) > 50f) {
                 EnemyManager.Instance.SpawnOne(PrefabManager.Instance.Attacker);
-                Break();
+               
+                EnemyManager.Instance.Delete(this);
+                Destroy(gameObject);
             }
 
             yield return new WaitForSeconds(1f);

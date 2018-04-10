@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.Build.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Boss : MonoBehaviour {
 
+	
 	[SerializeField] private GameObject model;
 	[SerializeField] private Color fullColor;
 	[SerializeField] private Color dieColor;
@@ -15,6 +15,9 @@ public class Boss : MonoBehaviour {
 	[SerializeField] private float speedCap;
 	[SerializeField] private float rotationSpeed;
 	[SerializeField] private GameObject dieParticle;
+	[SerializeField] private AudioClip moveClip;
+	[SerializeField] private AudioClip hitPlayerClip;
+	[SerializeField] private AudioClip[] explodeClips;
 	
 	private float health;
 	private Rigidbody rb;
@@ -25,6 +28,9 @@ public class Boss : MonoBehaviour {
 	private float radius;
 	private float scaleFactor;
 	private bool isDead;
+	private AudioSource source;
+	private AudioSource explodeSource;
+	private AudioSource hitPlayerSource;
 	
 	public void TakeDamage(float amount) {
 		if (isDead) return;
@@ -79,6 +85,7 @@ public class Boss : MonoBehaviour {
 	}
 
 	void SpawnOneParticle() {
+		if (!explodeSource.isPlaying) Utilities.Audio.PlayAudioRandom(explodeSource, explodeClips);
 		GameObject particle = Instantiate(dieParticle, transform.position + new Vector3(Random.Range(-radius, radius), Random.Range(-radius, radius)),
 			Quaternion.identity);
 		Destroy(particle, 3f);
@@ -103,6 +110,10 @@ public class Boss : MonoBehaviour {
 		speedCap = speedCap * Mathf.Clamp(scaleFactor, 1f, 1.5f);
 		health = health * scaleFactor;
 		transform.localScale *= scaleFactor;
+		source = GetComponent<AudioSource>();
+		explodeSource = gameObject.AddComponent<AudioSource>();
+		hitPlayerSource = gameObject.AddComponent<AudioSource>();
+		Utilities.Audio.PlayAudio(source, moveClip, 1f, true);
 	}
 
 	private void Update() {
@@ -136,6 +147,7 @@ public class Boss : MonoBehaviour {
 				other.GetComponent<Player>().TakeDamage(30f);
 				justHitPlayer = true;
 				Invoke("ContinueAttacking", 3f);
+				Utilities.Audio.PlayAudio(hitPlayerSource, hitPlayerClip);
 			}
 		}
 	}

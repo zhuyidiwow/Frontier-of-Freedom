@@ -18,6 +18,15 @@ public class GameManager : MonoBehaviour {
 
     [HideInInspector] public int Score = 0;
     private bool isRunning;
+
+    public AudioClip clipBrickBreak;
+
+
+    public void PlayBrickBreakAudio() {
+        AudioSource source = gameObject.AddComponent<AudioSource>();
+        Utilities.Audio.PlayAudio(source, clipBrickBreak, 0.1f);
+        Destroy(source, 1.5f);
+    }
     
     public void GetScore(int amount) {
         if (!isRunning) return;
@@ -100,7 +109,6 @@ public class GameManager : MonoBehaviour {
 
             offset += new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0f);
             Pickable newPickable = Instantiate(pickable, Player.Instance.transform.position + offset, Quaternion.identity);
-            Debug.Log(newPickable.name + " spawned");
             yield return new WaitForSeconds(waitTime);
         }
     }

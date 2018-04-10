@@ -346,6 +346,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healAmount: 10
   Type: 0
+  clipBullet: {fileID: 8300000, guid: 356342b539521ec4e82ea8ff587b9120, type: 3}
+  clipRocket: {fileID: 8300000, guid: 9ad0553ac15348e4682128ec6b273365, type: 3}
 --- !u!135 &135313469348134626
 SphereCollider:
   m_ObjectHideFlags: 1

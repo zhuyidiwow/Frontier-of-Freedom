@@ -345,6 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healAmount: 50
+  clipHealth: {fileID: 8300000, guid: 3eab0c8fe70ac94458f3d0cf12896424, type: 3}
 --- !u!135 &135313469348134626
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -7,6 +7,18 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour {
     public static Player Instance;
 
+    [SerializeField] private AudioClip clipHit;
+    [SerializeField] private AudioClip[] clipsShootBullet;
+    [SerializeField] private AudioClip clipHealth;
+    [SerializeField] private AudioClip clipBullet;
+    [SerializeField] private AudioClip clipRocket;
+    
+    private AudioSource sourceHit;
+    private AudioSource sourceShootBullet;
+    private AudioSource sourceHealth;
+    private AudioSource sourceBullet;
+    private AudioSource sourceRocket;
+    
     [SerializeField] private Color normalColor;
     [SerializeField] private Color hitColor;
 
@@ -32,6 +44,18 @@ public class Player : MonoBehaviour {
 
     public float Health = 100f;
 
+    public void PickUpHealthSound() {
+        Utilities.Audio.PlayAudio(sourceHealth, clipHealth, 1f);
+    }
+
+    public void PickUpBulletSound() {
+        Utilities.Audio.PlayAudio(sourceRocket, clipRocket, 1f);
+    }
+
+    public void PickUpRocketSound() {
+        Utilities.Audio.PlayAudio(sourceRocket, clipRocket, 1f);    
+    }
+    
     public void PickUpWeapon(Weapon newWeapon) {
         newWeapon = Instantiate(newWeapon).GetComponent<Weapon>();
         newWeapon.transform.parent = transform;
@@ -43,7 +67,7 @@ public class Player : MonoBehaviour {
         if (Health <= 0f) {
             Die();
         }
-
+        Utilities.Audio.PlayAudio(sourceHit, clipHit);
         UpdateUI();
 
         if (hitCoroutine != null) StopCoroutine(hitCoroutine);
@@ -76,6 +100,12 @@ public class Player : MonoBehaviour {
         plane = new Plane(Vector3.back, transform.position);
         baseWeapons = new List<Weapon> {Instantiate(PrefabManager.Instance.MissileLauncher).GetComponent<Weapon>()};
         UpdateUI();
+        
+        sourceHit = gameObject.AddComponent<AudioSource>();
+        sourceShootBullet = gameObject.AddComponent<AudioSource>();
+        sourceHealth = gameObject.AddComponent<AudioSource>();
+        sourceBullet = gameObject.AddComponent<AudioSource>();
+        sourceRocket = gameObject.AddComponent<AudioSource>();
     }
 
     private void Update() {
@@ -104,6 +134,8 @@ public class Player : MonoBehaviour {
             for (int i = 0; i < weaponCount; i++) {
                 baseWeapons[i].Shoot(dirList[i]);
             }
+
+                Utilities.Audio.PlayAudioRandom(sourceShootBullet, clipsShootBullet, 0.75f);            
 
             rocketLauncher.Shoot(dir);
             float speedChange = baseSpeedChange * Mathf.Sqrt(weaponCount);

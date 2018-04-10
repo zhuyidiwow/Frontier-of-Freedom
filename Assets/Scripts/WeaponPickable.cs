@@ -14,9 +14,11 @@ public class WeaponPickable : Pickable {
         switch (Type) {
             case EWeapon.BULLET_LAUNCHER:
                 Player.Instance.PickUpWeapon(PrefabManager.Instance.MissileLauncher);
+                Player.Instance.PickUpBulletSound();
                 break;
             case EWeapon.ROCKET_LAUNCHER:
                 Player.Instance.GetComponent<RocketLauncher>().LevelUp();
+                Player.Instance.PickUpRocketSound();
                 break;
             default:
                 Debug.LogError("Error in weapon pickable");

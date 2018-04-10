@@ -536,11 +536,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   breakParticle: {fileID: 1343723894232812, guid: 7438bb84c04a250478c52e0233ffb74c,
     type: 2}
+  breakClip: {fileID: 0}
   Score: 5
   Damage: 10
   moveForce: 5
   maxSpeed: 4
   trail: {fileID: 1612463328708554}
+  dieClip: {fileID: 8300000, guid: 2ad099319999c8540b75fba70fc8454a, type: 3}
   ShootInterval: 2
   weapon: {fileID: 1744574765977988}
   bulletSpeed: 15

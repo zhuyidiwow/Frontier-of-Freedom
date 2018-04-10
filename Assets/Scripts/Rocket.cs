@@ -7,6 +7,8 @@ public class Rocket : MonoBehaviour {
     [SerializeField] private GameObject explosionPrefab;
     [SerializeField] private float speedCap;
     [SerializeField] private float moveForce;
+
+    public AudioClip clipExplode;
     
     private Enemy target;
     private Rigidbody rb;
@@ -56,6 +58,7 @@ public class Rocket : MonoBehaviour {
     private void Explode() {
         GameObject particle = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         DeathZone deathZone = Instantiate(PrefabManager.Instance.DeathZone, transform.position, Quaternion.identity);
+        Utilities.Audio.PlayAudio(particle.AddComponent<AudioSource>(), clipExplode, 0.3f);
         Destroy(particle, 3f);
         Destroy(deathZone.gameObject, 0.3f);
         Destroy(gameObject);

@@ -13,7 +13,9 @@ public class Breakable : MonoBehaviour {
 //			ScoreText text = Instantiate(PrefabManager.Instance.ScoreText, pos, Quaternion.identity);
 //			text.Initialize(1, dir, pos); 
 //		}
-		
+		if (gameObject.CompareTag("Breakable")) {
+			GameManager.Instance.PlayBrickBreakAudio();
+		}
 		GameObject particle = Instantiate(breakParticle, transform.position, Quaternion.identity);
 		Destroy(particle, 3f);
 		Destroy(gameObject);

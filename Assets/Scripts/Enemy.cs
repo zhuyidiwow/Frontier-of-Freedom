@@ -13,6 +13,7 @@ public class Enemy : Breakable {
 	[SerializeField] protected float moveForce;
 	[SerializeField] protected float maxSpeed;
 	[SerializeField] protected GameObject trail;
+	[SerializeField] protected AudioClip dieClip;
 	
 	protected Player player;
 	protected Rigidbody rb;
@@ -29,6 +30,7 @@ public class Enemy : Breakable {
 		maxSpeed = maxSpeed * difficulty * randomFactor;
 		Score = (int) (Score * difficulty);
 		Damage = Damage * difficulty * randomFactor * 0.75f;
+		trail.SetActive(difficulty > 1.5f);
 	}
 
 	private void FixedUpdate() {
@@ -53,13 +55,15 @@ public class Enemy : Breakable {
 	}
 
 	public override void Break() {
-		base.Break();
 		EnemyManager.Instance.Delete(this);
 
 		Vector3 pos = transform.position;
 		Vector3 dir = (pos - player.transform.position).normalized;
 		ScoreText text = Instantiate(PrefabManager.Instance.ScoreText, pos, Quaternion.identity);
-		text.Initialize(Score, dir, pos); 
+		text.Initialize(Score, dir, pos);
+		
+		Utilities.Audio.PlayAudio(text.gameObject.AddComponent<AudioSource>(), dieClip, 0.3f);
+		base.Break();
 	}
 
 	private void OnTriggerEnter(Collider other) {
@@ -82,7 +86,8 @@ public class Enemy : Breakable {
 		while (true) {
 			if (Vector3.Distance(Player.Instance.transform.position, transform.position) > 50f) {
 				EnemyManager.Instance.SpawnOne();
-				Break();
+				EnemyManager.Instance.Delete(this);
+				Destroy(gameObject);
 			}
 			yield return new WaitForSeconds(1f);
 		}

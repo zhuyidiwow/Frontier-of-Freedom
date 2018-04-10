@@ -349,6 +349,7 @@ GameObject:
   - component: {fileID: 54408981692687016}
   - component: {fileID: 135062981560612254}
   - component: {fileID: 114286408552862476}
+  - component: {fileID: 82679557323888970}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -1114,6 +1115,86 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!82 &82679557323888970
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1995967365882672}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 30
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114020461384070034
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1221,6 +1302,15 @@ MonoBehaviour:
   rotationSpeed: 120
   dieParticle: {fileID: 1343723894232812, guid: b1fb07f2dc670b54ab3340c68dc8a2e6,
     type: 2}
+  moveClip: {fileID: 8300000, guid: ff93e4ddfd8084745a82f65ccb0ddf33, type: 3}
+  hitPlayerClip: {fileID: 8300000, guid: 1219e6f2c7e1ae643a8650b442d39ae3, type: 3}
+  explodeClips:
+  - {fileID: 8300000, guid: 5eacd2eea1a83d643b3c43b472314a8d, type: 3}
+  - {fileID: 8300000, guid: 786661cf4448fe54fb887fda374960b9, type: 3}
+  - {fileID: 8300000, guid: 71b4e8bada89ea3498f2997715496e0c, type: 3}
+  - {fileID: 8300000, guid: 71b4e8bada89ea3498f2997715496e0c, type: 3}
+  - {fileID: 8300000, guid: 9f6c6175f284a224eb5f10c0b0ff26d9, type: 3}
+  - {fileID: 8300000, guid: d67bd5e60a5de6b46aacaeaa5302a8cf, type: 3}
 --- !u!114 &114340129171487268
 MonoBehaviour:
   m_ObjectHideFlags: 1
