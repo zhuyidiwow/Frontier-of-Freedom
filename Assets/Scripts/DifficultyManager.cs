@@ -1,24 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class DifficultyManager : MonoBehaviour {
     public static DifficultyManager Instance;
 
     [HideInInspector] public float Difficulty;
     public float DropPerMinute;
-    public float ScoreBase;
-    public float ScorePower;
+
+    [SerializeField] private AnimationCurve scoreCurve;
+    [SerializeField] private AnimationCurve itemCurve;
     
     private float dropPerSec;
-
     private float startTime;
     private float timeModifier;
     private float scoreModifier;
-    private float itemModifier = 0f;
+    private float itemModifier;
+    private int itemCount;
+    
+    public void AddItemModifier(float amount) {
+        itemCount++;
+        int evaluationPoint = itemCount > 10 ? 10 : itemCount;
+        itemModifier += amount * itemCurve.Evaluate(evaluationPoint);
+    }
 
-    public void AddItem(float amount) {
-        itemModifier += amount;
+    public float Evaluate(AnimationCurve curve) {
+        return curve.Evaluate(Difficulty);
     }
     
     private void Awake() {
@@ -32,12 +40,14 @@ public class DifficultyManager : MonoBehaviour {
     }
 
     private void Update() {
+        int score = GameManager.Instance.Score;
+        Mathf.Clamp(score, 0, 5000);
+        
         timeModifier = -dropPerSec * (Time.time - startTime);
-        scoreModifier = Mathf.Pow(GameManager.Instance.Score / ScoreBase, ScorePower);
-
+        scoreModifier = scoreCurve.Evaluate(score);
+        
         Difficulty = 1f + timeModifier + scoreModifier + itemModifier;
-        if (Difficulty < 0.5f) Difficulty = 0.5f;
-//        Debug.Log("D: " + Difficulty);
+        Mathf.Clamp(Difficulty, 0.5f, 5f);
     }
     
     

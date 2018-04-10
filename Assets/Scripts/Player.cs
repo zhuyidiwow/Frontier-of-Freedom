@@ -7,30 +7,22 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour {
     public static Player Instance;
 
+    [SerializeField] private AnimationCurve weaponToSpeedCurve;
     [SerializeField] private AudioClip clipHit;
     [SerializeField] private AudioClip[] clipsShootBullet;
     [SerializeField] private AudioClip clipHealth;
     [SerializeField] private AudioClip clipBullet;
     [SerializeField] private AudioClip clipRocket;
-    
-    private AudioSource sourceHit;
-    private AudioSource sourceShootBullet;
-    private AudioSource sourceHealth;
-    private AudioSource sourceBullet;
-    private AudioSource sourceRocket;
-    
+
     [SerializeField] private Color normalColor;
     [SerializeField] private Color hitColor;
-
     [SerializeField] private Color normalEmissionColor;
-
-    [SerializeField] [ColorUsageAttribute(true, true, 0.5f, 3f, 0f, 1f)]
-    private Color hitEmissionColor;
-
-    [SerializeField] private Slider slider;
-    [SerializeField] private Image fill;
+    [SerializeField] [ColorUsageAttribute(true, true, 0.5f, 3f, 0f, 1f)] private Color hitEmissionColor;
     [SerializeField] private Color lowHealthColor;
     [SerializeField] private Color fullHealthColor;
+    
+    [SerializeField] private Slider slider;
+    [SerializeField] private Image fill;
 
     [SerializeField] private float baseSpeedChange;
     [SerializeField] private float maxHealth = 100f;
@@ -42,20 +34,26 @@ public class Player : MonoBehaviour {
     private RocketLauncher rocketLauncher;
     private Coroutine hitCoroutine;
 
+    private AudioSource sourceHit;
+    private AudioSource sourceShootBullet;
+    private AudioSource sourceHealth;
+    private AudioSource sourceBullet;
+    private AudioSource sourceRocket;
+
     public float Health = 100f;
 
     public void PickUpHealthSound() {
-        Utilities.Audio.PlayAudio(sourceHealth, clipHealth, 1f);
+        Utilities.Audio.PlayAudio(sourceHealth, clipHealth);
     }
 
     public void PickUpBulletSound() {
-        Utilities.Audio.PlayAudio(sourceRocket, clipRocket, 1f);
+        Utilities.Audio.PlayAudio(sourceBullet, clipBullet);
     }
 
     public void PickUpRocketSound() {
-        Utilities.Audio.PlayAudio(sourceRocket, clipRocket, 1f);    
+        Utilities.Audio.PlayAudio(sourceRocket, clipRocket);
     }
-    
+
     public void PickUpWeapon(Weapon newWeapon) {
         newWeapon = Instantiate(newWeapon).GetComponent<Weapon>();
         newWeapon.transform.parent = transform;
@@ -67,6 +65,7 @@ public class Player : MonoBehaviour {
         if (Health <= 0f) {
             Die();
         }
+
         Utilities.Audio.PlayAudio(sourceHit, clipHit);
         UpdateUI();
 
@@ -100,7 +99,7 @@ public class Player : MonoBehaviour {
         plane = new Plane(Vector3.back, transform.position);
         baseWeapons = new List<Weapon> {Instantiate(PrefabManager.Instance.MissileLauncher).GetComponent<Weapon>()};
         UpdateUI();
-        
+
         sourceHit = gameObject.AddComponent<AudioSource>();
         sourceShootBullet = gameObject.AddComponent<AudioSource>();
         sourceHealth = gameObject.AddComponent<AudioSource>();
@@ -135,10 +134,10 @@ public class Player : MonoBehaviour {
                 baseWeapons[i].Shoot(dirList[i]);
             }
 
-                Utilities.Audio.PlayAudioRandom(sourceShootBullet, clipsShootBullet, 0.75f);            
+            Utilities.Audio.PlayAudioRandom(sourceShootBullet, clipsShootBullet, 0.75f);
 
             rocketLauncher.Shoot(dir);
-            float speedChange = baseSpeedChange * Mathf.Sqrt(weaponCount);
+            float speedChange = baseSpeedChange * weaponToSpeedCurve.Evaluate(weaponCount > 20 ? 20 : weaponCount);
             rb.velocity += -dir * speedChange;
         }
 
@@ -148,29 +147,13 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private void AddForce(Vector3 force, float duration) {
-        if (addForceCoroutine != null) StopCoroutine(addForceCoroutine);
-        addForceCoroutine = StartCoroutine(AddForceCoroutine(force, duration));
-    }
-
-    private IEnumerator AddForceCoroutine(Vector3 force, float duration) {
-        float elapsedTime = 0;
-        while (elapsedTime < duration) {
-            rb.AddForce(force, ForceMode.Force);
-            yield return null;
-            elapsedTime += Time.deltaTime;
-        }
-
-        addForceCoroutine = null;
-    }
-
     private void Die() {
         GameManager.Instance.EndGame();
     }
 
     private IEnumerator HitCoroutine() {
         float elapsedTime = 0f;
-        float duration = 0.2f;
+        const float duration = 0.2f;
         Material material = GetComponent<Renderer>().material;
 
         while (elapsedTime < duration) {

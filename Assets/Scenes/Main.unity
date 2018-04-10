@@ -685,6 +685,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e76f9b8b8374416b9a46a75f82070be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponToSpeedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0.13205393
+      outSlope: 0.13205393
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 11.67336
+      value: 1.5415131
+      inSlope: 0.10996545
+      outSlope: 0.10996545
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 20
+      value: 2.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   clipHit: {fileID: 8300000, guid: 55e38d90437c3da4f9ba819c6e15a62d, type: 3}
   clipsShootBullet:
   - {fileID: 8300000, guid: 81c8073c7a1c42e4b9bdd34df789f0b7, type: 3}
@@ -697,10 +727,10 @@ MonoBehaviour:
   hitColor: {r: 1, g: 0.1397059, b: 0.1397059, a: 1}
   normalEmissionColor: {r: 0.35294116, g: 0.24913493, b: 0.0934256, a: 1}
   hitEmissionColor: {r: 2.468, g: 0.2903529, b: 0.2903529, a: 1}
-  slider: {fileID: 95157196}
-  fill: {fileID: 2080317564}
   lowHealthColor: {r: 1, g: 0.43382353, b: 0.43382353, a: 1}
   fullHealthColor: {r: 0.6888438, g: 1, b: 0.5661765, a: 1}
+  slider: {fileID: 95157196}
+  fill: {fileID: 2080317564}
   baseSpeedChange: 8
   maxHealth: 100
   Health: 100
@@ -2441,8 +2471,78 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Difficulty: 0
   DropPerMinute: 0.75
-  ScoreBase: 100
-  ScorePower: 0.5
+  scoreCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 147.19942
+      value: 1
+      inSlope: 0.0035584816
+      outSlope: 0.0035584816
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 801.87354
+      value: 1.7815943
+      inSlope: 0.0000061770215
+      outSlope: 0.0000061770215
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1552.5436
+      value: 2.2233794
+      inSlope: 0.0043304535
+      outSlope: 0.0043304535
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 2073.3726
+      value: 3.3285341
+      inSlope: -0.0023686169
+      outSlope: -0.0023686169
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 2988.8923
+      value: 4.077905
+      inSlope: 0.0014277102
+      outSlope: 0.0014277102
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 5000
+      value: 5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  itemCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 6.3826704
+      value: 0.87176526
+      inSlope: -0.043602075
+      outSlope: -0.043602075
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 10
+      value: 0.3
+      inSlope: -0.35892138
+      outSlope: -0.35892138
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!4 &1999281862
 Transform:
   m_ObjectHideFlags: 0
