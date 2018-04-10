@@ -18,6 +18,11 @@ public class EnemyManager : MonoBehaviour {
         if (maxEnemy > 60) {
             maxEnemy = 60;
         }
+
+        if (maxEnemy < 10) {
+            maxEnemy = 10;
+        }
+        
         return Enemies.Count < maxEnemy;
     }
 

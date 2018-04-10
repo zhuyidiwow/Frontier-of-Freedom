@@ -15,6 +15,11 @@ public class DifficultyManager : MonoBehaviour {
     private float startTime;
     private float timeModifier;
     private float scoreModifier;
+    private float itemModifier = 0f;
+
+    public void AddItem(float amount) {
+        itemModifier += amount;
+    }
     
     private void Awake() {
         if (Instance == null) Instance = this;
@@ -30,7 +35,8 @@ public class DifficultyManager : MonoBehaviour {
         timeModifier = -dropPerSec * (Time.time - startTime);
         scoreModifier = Mathf.Pow(GameManager.Instance.Score / ScoreBase, ScorePower);
 
-        Difficulty = 1f + timeModifier + scoreModifier;
+        Difficulty = 1f + timeModifier + scoreModifier + itemModifier;
+        if (Difficulty < 0.5f) Difficulty = 0.5f;
 //        Debug.Log("D: " + Difficulty);
     }
     

@@ -2440,7 +2440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Difficulty: 0
-  DropPerMinute: 1
+  DropPerMinute: 0.75
   ScoreBase: 100
   ScorePower: 0.5
 --- !u!4 &1999281862
