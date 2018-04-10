@@ -6,24 +6,14 @@ using UnityEngine.Assertions.Comparers;
 public class EnemyManager : MonoBehaviour {
     public static EnemyManager Instance;
 
-    public int MaxEnemy;
     [HideInInspector] public List<Enemy> Enemies;
 
+    public AnimationCurve DamageCurve;
+    public AnimationCurve DifficultyCurve;
+    [SerializeField] private AnimationCurve enemySizeCurve;
+
     public bool ShouldSpawnEnemies() {
-        float maxEnemy = Mathf.Floor(MaxEnemy * Mathf.Pow(DifficultyManager.Instance.Difficulty, 3f));
-        if (DifficultyManager.Instance.Difficulty > 1.5f) {
-            maxEnemy = Mathf.Floor(MaxEnemy * Mathf.Pow(DifficultyManager.Instance.Difficulty, 1.6f));
-        }
-
-        if (maxEnemy > 60) {
-            maxEnemy = 60;
-        }
-
-        if (maxEnemy < 10) {
-            maxEnemy = 10;
-        }
-        
-        return Enemies.Count < maxEnemy;
+        return Enemies.Count < (int) DifficultyManager.Instance.Evaluate(enemySizeCurve);
     }
 
     private void Awake() {

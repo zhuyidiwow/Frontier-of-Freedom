@@ -5,7 +5,12 @@ using UnityEngine.UI;
 
 public class Boss : MonoBehaviour {
 
-	
+	[SerializeField] private AnimationCurve damageModifierCurve;
+	[SerializeField] private AnimationCurve scaleFactorCurve;
+	[SerializeField] private AnimationCurve moveModifierCurve;
+
+	[SerializeField] private float distanceResetThreshold;
+	[SerializeField] private float damage;
 	[SerializeField] private GameObject model;
 	[SerializeField] private Color fullColor;
 	[SerializeField] private Color dieColor;
@@ -26,7 +31,6 @@ public class Boss : MonoBehaviour {
 	private bool justHitPlayer;
 	private float baseRadius = 1.73f;
 	private float radius;
-	private float scaleFactor;
 	private bool isDead;
 	private AudioSource source;
 	private AudioSource explodeSource;
@@ -102,14 +106,18 @@ public class Boss : MonoBehaviour {
 
 		spikeCount = spikes.Count;
 		TakeDamage(0f);
-
-		scaleFactor = Mathf.Pow(DifficultyManager.Instance.Difficulty, 0.4f);
+		float scaleFactor = DifficultyManager.Instance.Evaluate(scaleFactorCurve);
+		float moveModifier = DifficultyManager.Instance.Evaluate(moveModifierCurve);
 		
 		radius = baseRadius * scaleFactor;
-		moveForce = moveForce * scaleFactor;
-		speedCap = speedCap * Mathf.Clamp(scaleFactor, 1f, 1.5f);
 		health = health * scaleFactor;
 		transform.localScale *= scaleFactor;
+		
+		moveForce = moveForce * moveModifier;
+		speedCap = speedCap * moveModifier;
+		
+		damage *= DifficultyManager.Instance.Evaluate(damageModifierCurve);
+		
 		source = GetComponent<AudioSource>();
 		explodeSource = gameObject.AddComponent<AudioSource>();
 		hitPlayerSource = gameObject.AddComponent<AudioSource>();
@@ -131,8 +139,9 @@ public class Boss : MonoBehaviour {
 			rb.velocity = rb.velocity.normalized * speedCap;
 		}
 
-		if (distance > 30f) {
-			transform.position = Player.Instance.transform.position + (transform.position - Player.Instance.transform.position).normalized * 30f;
+		if (distance > distanceResetThreshold) {
+			transform.position = Player.Instance.transform.position +
+			                     (transform.position - Player.Instance.transform.position).normalized * distanceResetThreshold;
 		}
 	}
 
@@ -144,7 +153,7 @@ public class Boss : MonoBehaviour {
 
 		if (other.CompareTag("Player")) {
 			if (!justHitPlayer) {
-				other.GetComponent<Player>().TakeDamage(30f);
+				other.GetComponent<Player>().TakeDamage(damage);
 				justHitPlayer = true;
 				Invoke("ContinueAttacking", 3f);
 				Utilities.Audio.PlayAudio(hitPlayerSource, hitPlayerClip);

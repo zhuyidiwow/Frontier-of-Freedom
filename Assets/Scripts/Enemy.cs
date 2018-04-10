@@ -9,7 +9,7 @@ public class Enemy : Breakable {
 
 	public int Score;
 	public float Damage;
-	
+
 	[SerializeField] protected float moveForce;
 	[SerializeField] protected float maxSpeed;
 	[SerializeField] protected GameObject trail;
@@ -25,12 +25,14 @@ public class Enemy : Breakable {
 		StartCoroutine(DistanceCheck());
 		
 		float randomFactor = Random.Range(0.75f, 1.5f);
-		float difficulty = Mathf.Pow(DifficultyManager.Instance.Difficulty, 0.5f);
-		moveForce = moveForce * difficulty;
-		maxSpeed = maxSpeed * difficulty * randomFactor;
-		Score = (int) (Score * difficulty);
-		Damage = Damage * difficulty * randomFactor * 0.75f;
-		trail.SetActive(difficulty > 1.5f);
+		transform.localScale *= randomFactor;
+		
+		float difficulty = DifficultyManager.Instance.Evaluate(EnemyManager.Instance.DifficultyCurve);
+		moveForce = moveForce * difficulty * randomFactor;
+		maxSpeed = maxSpeed * difficulty;
+		Score = (int) (Score * difficulty * randomFactor);
+		Damage = Damage * DifficultyManager.Instance.Evaluate(EnemyManager.Instance.DamageCurve);
+		trail.SetActive(difficulty > 1.25f);
 	}
 
 	private void FixedUpdate() {

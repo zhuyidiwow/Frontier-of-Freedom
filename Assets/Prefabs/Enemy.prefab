@@ -819,9 +819,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   breakParticle: {fileID: 1343723894232812, guid: 7438bb84c04a250478c52e0233ffb74c,
     type: 2}
-  breakClip: {fileID: 0}
   Score: 3
   Damage: 5
+  damageCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0.013531199
+      outSlope: 0.013531199
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 3.4524305
+      value: 1.161783
+      inSlope: 0.15642005
+      outSlope: 0.15642005
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 6
+      value: 1.3
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  moveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: -0.021190079
+      outSlope: -0.021190079
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 3.4592159
+      value: 1.261977
+      inSlope: 0.1990207
+      outSlope: 0.1990207
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 6
+      value: 1.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   moveForce: 4
   maxSpeed: 3
   trail: {fileID: 1544433531792952}

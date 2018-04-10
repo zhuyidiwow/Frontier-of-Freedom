@@ -430,8 +430,115 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139fe25a29615234a949c9bb393e8fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxEnemy: 10
   Enemies: []
+  DamageCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0.023189915
+      outSlope: 0.023189915
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 3.3737228
+      value: 1.1592203
+      inSlope: 0.13056293
+      outSlope: 0.13056293
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 6
+      value: 1.3
+      inSlope: 0.03017455
+      outSlope: 0
+      tangentMode: 1
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  DifficultyCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 1
+      value: 1.0022278
+      inSlope: 0.01821707
+      outSlope: 0.01821707
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 3.5355217
+      value: 1.2335602
+      inSlope: 0.09955444
+      outSlope: 0.09955444
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 6
+      value: 1.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  enemySizeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 1
+      value: 12
+      inSlope: 4.307346
+      outSlope: 4.307346
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.637329
+      value: 13.5167
+      inSlope: 10.934129
+      outSlope: 10.934129
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 2.3569527
+      value: 27.833054
+      inSlope: 0.14404577
+      outSlope: 0.14404577
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 2.8371592
+      value: 27.858637
+      inSlope: 7.183983
+      outSlope: 7.183983
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 3.3264465
+      value: 41.51617
+      inSlope: 6.7357006
+      outSlope: 6.7357006
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 6
+      value: 50
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!1 &89181830
 GameObject:
   m_ObjectHideFlags: 0

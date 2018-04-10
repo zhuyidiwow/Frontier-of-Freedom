@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance;
 
     public GameObject Canvas;
+    [SerializeField] private AnimationCurve bossWaitScoreCurve;
     [SerializeField] private GameObject endGameCanvas;
     [SerializeField] private Text scoreText;
 
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour {
 
     private IEnumerator SpawnBossCoroutine() {
         int count = 0;
-        int waitScore = 300;
+        int waitScore = (int) bossWaitScoreCurve.Evaluate(count);
         while (isRunning) {
             var score = waitScore;
             yield return new WaitUntil(()=> Score > score);
@@ -82,7 +83,7 @@ public class GameManager : MonoBehaviour {
                 Player.Instance.transform.position + new Vector3(CameraManager.Instance.ViewRange.x, CameraManager.Instance.ViewRange.y, 0f),
                 Quaternion.identity);
             count++;
-            waitScore += 100 * (count + 2);
+            waitScore += (int) bossWaitScoreCurve.Evaluate(count > 10 ? 10 : count);
         }
     }
 

@@ -1128,7 +1128,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -1292,6 +1292,98 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6302fd91c77314c499ec94924efc6d82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageModifierCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0.052414063
+      outSlope: 0.052414063
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 3.493558
+      value: 1.2496315
+      inSlope: 0.12814999
+      outSlope: 0.12814999
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 6
+      value: 1.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  scaleFactorCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0.46020252
+      outSlope: 0.46020252
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 3.380611
+      value: 1.5557656
+      inSlope: 0.24000001
+      outSlope: 0.24000001
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 6
+      value: 2.2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  moveModifierCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0.2673229
+      outSlope: 0.2673229
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 3.5889332
+      value: 1.239851
+      inSlope: 0.014374957
+      outSlope: 0.014374957
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 6
+      value: 1.5
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  distanceResetThreshold: 30
+  damage: 20
   model: {fileID: 1889629590191438}
   fullColor: {r: 0.6888438, g: 1, b: 0.5661765, a: 1}
   dieColor: {r: 1, g: 0.43382353, b: 0.43382353, a: 1}

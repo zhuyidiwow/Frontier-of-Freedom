@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,7 +13,7 @@ public class Attacker : Enemy {
     }
 
     public float ShootInterval;
-
+    
     [SerializeField] private GameObject weapon;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float stoppingDistance;
@@ -32,11 +33,11 @@ public class Attacker : Enemy {
         weapon.transform.localScale = originalWeaponScale * 2f;
         
         float randomFactor = Random.Range(0.75f, 1.5f);
-        float difficulty = Mathf.Pow(DifficultyManager.Instance.Difficulty, 0.5f);
-        moveForce = moveForce * difficulty;
-        maxSpeed = maxSpeed * difficulty * randomFactor;
-        Score = (int) (Score * difficulty);
-        Damage = Damage * difficulty * randomFactor * 0.75f;
+        float difficulty = DifficultyManager.Instance.Evaluate(EnemyManager.Instance.DifficultyCurve);
+        moveForce = moveForce * difficulty * randomFactor;
+        maxSpeed = maxSpeed * difficulty;
+        Score = (int) (Score * difficulty * randomFactor);
+        Damage = Damage * randomFactor * DifficultyManager.Instance.Evaluate(EnemyManager.Instance.DamageCurve);
 
         bulletSpeed = bulletSpeed * difficulty * randomFactor;
         if (bulletSpeed > 25f) bulletSpeed = 25f;
@@ -44,7 +45,6 @@ public class Attacker : Enemy {
         stoppingDistance = stoppingDistance * difficulty;
         if (stoppingDistance > 10f) stoppingDistance = 10f;
         trail.SetActive(difficulty > 1.5f);
-        
     }
 
     private void FixedUpdate() {
