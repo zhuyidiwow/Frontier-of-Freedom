@@ -64,12 +64,15 @@ public class GameManager : MonoBehaviour {
 
     private IEnumerator SpawnBossCoroutine() {
         int count = 0;
+        int waitScore = 200;
         while (isRunning) {
-            yield return new WaitUntil(()=> Score > 200f * (count + 1));
+            var score = waitScore;
+            yield return new WaitUntil(()=> Score > score);
             Instantiate(PrefabManager.Instance.Boss,
                 Player.Instance.transform.position + new Vector3(CameraManager.Instance.ViewRange.x, CameraManager.Instance.ViewRange.y, 0f),
                 Quaternion.identity);
             count++;
+            waitScore += 100 * count;
         }
     }
 }
