@@ -11,7 +11,7 @@ public class DeathZone : MonoBehaviour {
         }
 
         if (other.CompareTag("Enemy")) {
-            GameManager.Instance.Score(other.GetComponent<Enemy>().Score);
+            GameManager.Instance.GetScore(other.GetComponent<Enemy>().Score);
             other.GetComponent<Enemy>().Break();
         }
 

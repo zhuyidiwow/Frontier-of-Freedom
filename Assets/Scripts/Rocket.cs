@@ -39,7 +39,7 @@ public class Rocket : MonoBehaviour {
         }
 		
         if (otherObj.CompareTag("Enemy")) {
-            GameManager.Instance.Score(otherObj.GetComponent<Enemy>().Score);
+            GameManager.Instance.GetScore(otherObj.GetComponent<Enemy>().Score);
             otherObj.GetComponent<Enemy>().Break();
             GameObject particle = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             

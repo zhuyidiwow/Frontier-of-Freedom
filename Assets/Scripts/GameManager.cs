@@ -16,20 +16,15 @@ public class GameManager : MonoBehaviour {
 
     [HideInInspector] public float Timer;
 
-    private int score;
-
-    private bool isBoss;
-
-    public void Score(int amount) {
-        score += amount;
-        scoreText.text = score.ToString();
-
-        if (score > 50f && !isBoss) {
-            isBoss = true;
-            Instantiate(PrefabManager.Instance.Boss,
-                Player.Instance.transform.position + new Vector3(CameraManager.Instance.ViewRange.x, CameraManager.Instance.ViewRange.y, 0f),
-                Quaternion.identity);
-        }
+    [HideInInspector] public int Score;
+    private bool isRunning;
+    
+    public void GetScore(int amount) {
+        if (!isRunning) return;
+        
+        Score += amount;
+        scoreText.text = Score.ToString();
+        
     }
 
     public void PickExtraTime(float amount) {
@@ -38,17 +33,20 @@ public class GameManager : MonoBehaviour {
     }
 
     public void EndGame() {
-        Time.timeScale = 0.1f;
+        Time.timeScale = 0.15f;
         endGameCanvas.SetActive(true);
+        isRunning = false;
     }
 
     private void Awake() {
         Instance = this;
+        isRunning = true;
     }
 
     private void Start() {
         endGameCanvas.SetActive(false);
         Timer = timerCap;
+        StartCoroutine(SpawnBossCoroutine());
     }
 
 //    private void Update() {
@@ -62,5 +60,15 @@ public class GameManager : MonoBehaviour {
     private void UpdateTimerUI() {
         timerSlider.value = Timer / timerCap;
         timerText.text = Timer.ToString().Substring(0, 4);
+    }
+
+    private IEnumerator SpawnBossCoroutine() {
+        int count = 0;
+        while (isRunning) {
+            Instantiate(PrefabManager.Instance.Boss,
+                Player.Instance.transform.position + new Vector3(CameraManager.Instance.ViewRange.x, CameraManager.Instance.ViewRange.y, 0f),
+                Quaternion.identity);
+            yield return new WaitUntil(()=> Score > 200f * (count + 1));
+        }
     }
 }

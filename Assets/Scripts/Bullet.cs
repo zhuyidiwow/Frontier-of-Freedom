@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour {
 		}
 		
 		if (otherObj.CompareTag("Enemy")) {
-			GameManager.Instance.Score(otherObj.GetComponent<Enemy>().Score);
+			GameManager.Instance.GetScore(otherObj.GetComponent<Enemy>().Score);
 			otherObj.GetComponent<Enemy>().Break();
 		}
 
