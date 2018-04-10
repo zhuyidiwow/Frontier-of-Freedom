@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour {
 
     public void PlayBrickBreakAudio() {
         AudioSource source = gameObject.AddComponent<AudioSource>();
-        Utilities.Audio.PlayAudio(source, clipBrickBreak, 0.1f);
+        Utilities.Audio.PlayAudio(source, clipBrickBreak, 0.03f);
         Destroy(source, 1.5f);
     }
     
@@ -59,13 +60,12 @@ public class GameManager : MonoBehaviour {
         StartCoroutine(SpawnItemCoroutine());
     }
 
-//    private void Update() {
-//        Timer -= Time.deltaTime;
-//        if (Timer <= 0f) {
-//            EndGame();
-//        }
-//        UpdateTimerUI();
-//    }
+    private void Update() {
+        if (!isRunning && Input.GetKeyDown(KeyCode.R)) {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene("Main");
+        } 
+    }
 
     private void UpdateTimerUI() {
         timerSlider.value = Timer / timerCap;
@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour {
         while (isRunning) {
             float waitTime = Random.Range(3f, 6f);
             Pickable pickable;
-            if (Player.Instance.Health < 25f) {
+            if (Player.Instance.Health < 60f) {
                 pickable = PrefabManager.Instance.HealthPickable;
                 waitTime -= 2f;
             } else {
