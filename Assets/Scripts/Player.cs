@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
     public static Player Instance;
 
     [SerializeField] private AnimationCurve weaponToSpeedCurve;
+    [SerializeField] private AnimationCurve speedCapCurve;
     [SerializeField] private AudioClip clipHit;
     [SerializeField] private AudioClip[] clipsShootBullet;
     [SerializeField] private AudioClip clipHealth;
@@ -17,10 +18,13 @@ public class Player : MonoBehaviour {
     [SerializeField] private Color normalColor;
     [SerializeField] private Color hitColor;
     [SerializeField] private Color normalEmissionColor;
-    [SerializeField] [ColorUsageAttribute(true, true, 0.5f, 3f, 0f, 1f)] private Color hitEmissionColor;
+
+    [SerializeField] [ColorUsageAttribute(true, true, 0.5f, 3f, 0f, 1f)]
+    private Color hitEmissionColor;
+
     [SerializeField] private Color lowHealthColor;
     [SerializeField] private Color fullHealthColor;
-    
+
     [SerializeField] private Slider slider;
     [SerializeField] private Image fill;
 
@@ -30,7 +34,7 @@ public class Player : MonoBehaviour {
     private Rigidbody rb;
     private Coroutine addForceCoroutine;
     private Plane plane;
-    private List<Weapon> baseWeapons;
+    private List<Weapon> bulletLaunchers;
     private RocketLauncher rocketLauncher;
     private Coroutine hitCoroutine;
 
@@ -57,7 +61,7 @@ public class Player : MonoBehaviour {
     public void PickUpWeapon(Weapon newWeapon) {
         newWeapon = Instantiate(newWeapon).GetComponent<Weapon>();
         newWeapon.transform.parent = transform;
-        baseWeapons.Add(newWeapon);
+        bulletLaunchers.Add(newWeapon);
     }
 
     public void TakeDamage(float amount) {
@@ -97,7 +101,7 @@ public class Player : MonoBehaviour {
         rocketLauncher = GetComponent<RocketLauncher>();
 
         plane = new Plane(Vector3.back, transform.position);
-        baseWeapons = new List<Weapon> {Instantiate(PrefabManager.Instance.MissileLauncher).GetComponent<Weapon>()};
+        bulletLaunchers = new List<Weapon> {Instantiate(PrefabManager.Instance.MissileLauncher).GetComponent<Weapon>()};
         UpdateUI();
 
         sourceHit = gameObject.AddComponent<AudioSource>();
@@ -108,6 +112,50 @@ public class Player : MonoBehaviour {
     }
 
     private void Update() {
+        if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android) {
+            TouchInput();
+        } else {
+            MouseInput();
+        }
+        CapSpeed();
+    }
+
+    private void TouchInput() {
+        for (int t = 0; t < Input.touchCount; t++) {
+            if (Input.GetTouch(t).phase == TouchPhase.Began) {
+                float distance;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                plane.Raycast(ray, out distance);
+                Vector3 touchPos = ray.origin + ray.direction * distance;
+                Vector3 inputDir = touchPos - transform.position;
+                inputDir = inputDir.normalized;
+
+                int weaponCount = bulletLaunchers.Count;
+
+                Vector3 baseDir = Quaternion.AngleAxis(-45f, Vector3.back) * inputDir;
+                float angleStep = 90f / (weaponCount + 1);
+
+                List<Vector3> dirList = new List<Vector3>();
+
+                for (int i = 0; i < weaponCount; i++) {
+                    dirList.Add(Quaternion.AngleAxis(angleStep * (i + 1), Vector3.back) * baseDir);
+                    Weapon weapon = bulletLaunchers[i];
+                    weapon.transform.position = 0.5f * dirList[i] + transform.position;
+                    weapon.transform.LookAt(transform.position + dirList[i]);
+                    bulletLaunchers[i].Shoot(dirList[i]);
+                }
+
+                Utilities.Audio.PlayAudioRandom(sourceShootBullet, clipsShootBullet, 0.75f);
+
+                rocketLauncher.Shoot(inputDir);
+                float speedChange = baseSpeedChange * weaponToSpeedCurve.Evaluate(weaponCount > 20 ? 20 : weaponCount);
+                rb.velocity += -inputDir * speedChange;
+                rb.velocity += -inputDir * speedChange;
+            }
+        }
+    }
+
+    private void MouseInput() {
         float distance;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         plane.Raycast(ray, out distance);
@@ -115,7 +163,7 @@ public class Player : MonoBehaviour {
         Vector3 dir = mousePos - transform.position;
         dir = dir.normalized;
 
-        int weaponCount = baseWeapons.Count;
+        int weaponCount = bulletLaunchers.Count;
 
         Vector3 baseDir = Quaternion.AngleAxis(-45f, Vector3.back) * dir;
         float angleStep = 90f / (weaponCount + 1);
@@ -124,14 +172,14 @@ public class Player : MonoBehaviour {
 
         for (int i = 0; i < weaponCount; i++) {
             dirList.Add(Quaternion.AngleAxis(angleStep * (i + 1), Vector3.back) * baseDir);
-            Weapon weapon = baseWeapons[i];
+            Weapon weapon = bulletLaunchers[i];
             weapon.transform.position = 0.5f * dirList[i] + transform.position;
             weapon.transform.LookAt(transform.position + dirList[i]);
         }
 
         if (Input.GetMouseButtonDown(0)) {
             for (int i = 0; i < weaponCount; i++) {
-                baseWeapons[i].Shoot(dirList[i]);
+                bulletLaunchers[i].Shoot(dirList[i]);
             }
 
             Utilities.Audio.PlayAudioRandom(sourceShootBullet, clipsShootBullet, 0.75f);
@@ -140,8 +188,10 @@ public class Player : MonoBehaviour {
             float speedChange = baseSpeedChange * weaponToSpeedCurve.Evaluate(weaponCount > 20 ? 20 : weaponCount);
             rb.velocity += -dir * speedChange;
         }
+    }
 
-        float speedCap = Mathf.Pow(DifficultyManager.Instance.Difficulty, 0.33f) * 15f;
+    private void CapSpeed() {
+        float speedCap = DifficultyManager.Instance.Evaluate(speedCapCurve);
         if (rb.velocity.magnitude > speedCap) {
             rb.velocity = rb.velocity.normalized * speedCap;
         }

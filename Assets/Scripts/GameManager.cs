@@ -86,6 +86,8 @@ public class GameManager : MonoBehaviour {
             waitScore += (int) bossWaitScoreCurve.Evaluate(count > 10 ? 10 : count);
         }
     }
+    
+    //TODO: balance this
 
     private IEnumerator SpawnItemCoroutine() {
         while (isRunning) {
