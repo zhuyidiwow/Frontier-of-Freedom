@@ -10,5 +10,6 @@ public class BulletLauncher : Weapon {
         Vector3 offset = dir * 0.5f;
         GameObject missile = Instantiate(missilePrefab, transform.position + offset, Quaternion.identity, null);
         missile.GetComponent<Rigidbody>().velocity = dir * missileSpeed;
+        Destroy(missile, 10f);
     }
 }
