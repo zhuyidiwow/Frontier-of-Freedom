@@ -31,7 +31,7 @@ public class DifficultyManager : MonoBehaviour {
         scoreModifier = Mathf.Pow(GameManager.Instance.Score / ScoreBase, ScorePower);
 
         Difficulty = 1f + timeModifier + scoreModifier;
-        //        Debug.Log("Log: " + );
+        Debug.Log("D: " + Difficulty);
     }
     
     

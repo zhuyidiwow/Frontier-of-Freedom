@@ -69,10 +69,13 @@ public class EnemyManager : MonoBehaviour {
             yield return new WaitForSeconds(3f);
 
             while (ShouldSpawnEnemies()) {
-                if (Random.Range(0f, 1f) > 0.75f) {
-                    SpawnOne(PrefabManager.Instance.Attacker);
-                } else {
+                float attackerRate = (Mathf.Pow(DifficultyManager.Instance.Difficulty, 0.5f) - 1f);
+                if (attackerRate > 0.75f) attackerRate = 0.75f;
+                
+                if (Random.Range(0f, 1f) > attackerRate) {
                     SpawnOne();
+                } else {
+                    SpawnOne(PrefabManager.Instance.Attacker);
                 }
 
                 yield return null;
