@@ -1216,7 +1216,7 @@ MonoBehaviour:
   dieColor: {r: 1, g: 0.43382353, b: 0.43382353, a: 1}
   healthSlider: {fileID: 114020461384070034}
   fill: {fileID: 114962495380745322}
-  moveForce: 20
+  moveForce: 15
   speedCap: 10
   rotationSpeed: 120
   dieParticle: {fileID: 1343723894232812, guid: b1fb07f2dc670b54ab3340c68dc8a2e6,

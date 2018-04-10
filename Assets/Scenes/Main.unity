@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139fe25a29615234a949c9bb393e8fb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxEnemy: 30
+  MaxEnemy: 10
   Enemies: []
 --- !u!1 &89181830
 GameObject:
@@ -570,7 +570,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 2080317563}
   m_HandleRect: {fileID: 0}
@@ -2270,7 +2270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Difficulty: 0
-  DropPerMinute: 0.75
+  DropPerMinute: 1
   ScoreBase: 100
   ScorePower: 0.5
 --- !u!4 &1999281862

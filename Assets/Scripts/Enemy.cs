@@ -28,7 +28,7 @@ public class Enemy : Breakable {
 		moveForce = moveForce * difficulty;
 		maxSpeed = maxSpeed * difficulty * randomFactor;
 		Score = (int) (Score * difficulty);
-		Damage = Damage * difficulty * randomFactor;
+		Damage = Damage * difficulty * randomFactor * 0.75f;
 	}
 
 	private void FixedUpdate() {

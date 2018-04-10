@@ -36,12 +36,14 @@ public class Attacker : Enemy {
         moveForce = moveForce * difficulty;
         maxSpeed = maxSpeed * difficulty * randomFactor;
         Score = (int) (Score * difficulty);
-        Damage = Damage * difficulty * randomFactor;
+        Damage = Damage * difficulty * randomFactor * 0.75f;
 
         bulletSpeed = bulletSpeed * difficulty * randomFactor;
+        if (bulletSpeed > 25f) bulletSpeed = 25f;
         ShootInterval = ShootInterval / difficulty;
         stoppingDistance = stoppingDistance * difficulty;
         if (stoppingDistance > 10f) stoppingDistance = 10f;
+        
     }
 
     private void FixedUpdate() {

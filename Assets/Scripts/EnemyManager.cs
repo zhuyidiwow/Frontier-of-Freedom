@@ -10,7 +10,15 @@ public class EnemyManager : MonoBehaviour {
     [HideInInspector] public List<Enemy> Enemies;
 
     public bool ShouldSpawnEnemies() {
-        return Enemies.Count < MaxEnemy;
+        float maxEnemy = Mathf.Floor(MaxEnemy * Mathf.Pow(DifficultyManager.Instance.Difficulty, 3f));
+        if (DifficultyManager.Instance.Difficulty > 1.5f) {
+            maxEnemy = Mathf.Floor(MaxEnemy * Mathf.Pow(DifficultyManager.Instance.Difficulty, 1.6f));
+        }
+
+        if (maxEnemy > 60) {
+            maxEnemy = 60;
+        }
+        return Enemies.Count < maxEnemy;
     }
 
     private void Awake() {

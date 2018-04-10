@@ -11,7 +11,7 @@
             damage = damageAmount;
 
             rb.velocity = (Player.Instance.transform.position - transform.position).normalized * speed;
-            
+            Destroy(gameObject, 10f);
         }
 
         private void OnTriggerEnter(Collider other) {

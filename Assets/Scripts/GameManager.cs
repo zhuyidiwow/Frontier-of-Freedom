@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour {
         endGameCanvas.SetActive(false);
         Timer = timerCap;
         StartCoroutine(SpawnBossCoroutine());
+        StartCoroutine(SpawnItemCoroutine());
     }
 
 //    private void Update() {
@@ -64,7 +65,7 @@ public class GameManager : MonoBehaviour {
 
     private IEnumerator SpawnBossCoroutine() {
         int count = 0;
-        int waitScore = 200;
+        int waitScore = 300;
         while (isRunning) {
             var score = waitScore;
             yield return new WaitUntil(()=> Score > score);
@@ -73,6 +74,34 @@ public class GameManager : MonoBehaviour {
                 Quaternion.identity);
             count++;
             waitScore += 100 * (count + 2);
+        }
+    }
+
+    private IEnumerator SpawnItemCoroutine() {
+        while (isRunning) {
+            float waitTime = Random.Range(3f, 6f);
+            Pickable pickable;
+            if (Player.Instance.Health < 25f) {
+                pickable = PrefabManager.Instance.HealthPickable;
+                waitTime -= 2f;
+            } else {
+                float ran = Random.Range(0f, 1f);
+                if (ran > 0.67f) {
+                    pickable = PrefabManager.Instance.WeaponPickable;
+                } else if (ran > 0.33f) {
+                    pickable = PrefabManager.Instance.RocketPickable;
+                } else {
+                    pickable = PrefabManager.Instance.HealthPickable;
+                }
+            }
+
+            Vector3 playerVelocity = Player.Instance.GetComponent<Rigidbody>().velocity;
+            Vector3 offset = playerVelocity.normalized * 20f;
+
+            offset += new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0f);
+            Pickable newPickable = Instantiate(pickable, Player.Instance.transform.position + offset, Quaternion.identity);
+            Debug.Log(newPickable.name + " spawned");
+            yield return new WaitForSeconds(waitTime);
         }
     }
 }

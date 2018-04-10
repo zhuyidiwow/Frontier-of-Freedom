@@ -30,7 +30,7 @@ public class Player : MonoBehaviour {
     private RocketLauncher rocketLauncher;
     private Coroutine hitCoroutine;
 
-    private float health = 100f;
+    public float Health = 100f;
 
     public void PickUpWeapon(Weapon newWeapon) {
         newWeapon = Instantiate(newWeapon).GetComponent<Weapon>();
@@ -39,8 +39,8 @@ public class Player : MonoBehaviour {
     }
 
     public void TakeDamage(float amount) {
-        health -= amount;
-        if (health <= 0f) {
+        Health -= amount;
+        if (Health <= 0f) {
             Die();
         }
 
@@ -51,17 +51,17 @@ public class Player : MonoBehaviour {
     }
 
     public void Heal(float amount) {
-        health += amount;
-        if (health >= maxHealth) {
-            health = maxHealth;
+        Health += amount;
+        if (Health >= maxHealth) {
+            Health = maxHealth;
         }
 
         UpdateUI();
     }
 
     private void UpdateUI() {
-        slider.value = health / maxHealth;
-        fill.color = Color.Lerp(lowHealthColor, fullHealthColor, health / maxHealth);
+        slider.value = Health / maxHealth;
+        fill.color = Color.Lerp(lowHealthColor, fullHealthColor, Health / maxHealth);
     }
 
     private void Awake() {

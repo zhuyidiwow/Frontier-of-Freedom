@@ -543,7 +543,7 @@ MonoBehaviour:
   trail: {fileID: 1612463328708554}
   ShootInterval: 2
   weapon: {fileID: 1744574765977988}
-  bulletSpeed: 20
+  bulletSpeed: 15
   stoppingDistance: 7.5
   continueChasingDistance: 15
 --- !u!136 &136454377162231202
