@@ -26,6 +26,8 @@ public class Chunk : MonoBehaviour {
     private float horiMin;
     private float horiMax;
 
+    private List<GameObject> children  = new List<GameObject>();
+    
     private void Start() {
         chunkManager = ChunkManager.Instance;
         player = Player.Instance.transform;
@@ -46,6 +48,10 @@ public class Chunk : MonoBehaviour {
         }
 
         SpawnItems();
+        
+        for (int i = 0; i < transform.childCount; i++) {
+            children.Add(transform.GetChild(i).gameObject);
+        }
     }
 
     private void SpawnItems() {
@@ -195,5 +201,24 @@ public class Chunk : MonoBehaviour {
             Quaternion.identity, chunkManager.transform);
         topLeft = chunk.GetComponent<Chunk>();
         UpdateAllNeighbours();
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (other.CompareTag("Player")) {
+            foreach (GameObject child in children) {
+                
+                if (child != null)
+                child.SetActive(false);
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Player")) {
+            foreach (GameObject child in children) {
+                if (child != null)
+                child.SetActive(true);
+            }
+        }
     }
 }

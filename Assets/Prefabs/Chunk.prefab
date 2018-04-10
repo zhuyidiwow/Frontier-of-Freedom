@@ -393,6 +393,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4053570769119846}
   - component: {fileID: 114461091947863918}
+  - component: {fileID: 65549075086705848}
   m_Layer: 0
   m_Name: Chunk
   m_TagString: Untagged
@@ -1344,7 +1345,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1313156388502320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 929.9374, y: 847.14087, z: -1370.1674}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4431412604615434}
@@ -5361,6 +5362,18 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65549075086705848
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1313156388502320}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 100, y: 100, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65553187837621060
 BoxCollider:

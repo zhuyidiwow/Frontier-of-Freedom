@@ -108,9 +108,9 @@ public class Player : MonoBehaviour {
             rb.velocity += -dir * speedChange;
         }
 
-        if (rb.velocity.magnitude > 20f) {
-            rb.velocity = rb.velocity.normalized * 20f;
-        }
+//        if (rb.velocity.magnitude > 20f) {
+//            rb.velocity = rb.velocity.normalized * 30f * DifficultyManager.Instance.Difficulty;
+//        }
     }
 
     private void AddForce(Vector3 force, float duration) {

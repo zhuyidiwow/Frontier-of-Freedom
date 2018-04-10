@@ -20,7 +20,7 @@ public class ScoreText : MonoBehaviour {
         velocity = initialDir * baseSpeed;
         isInitialized = true;
         startTime = Time.time;
-        baseScale = value / 3f;
+        baseScale = Mathf.Pow(value / 3f, 0.5f);
     }
 
     private void Update() {

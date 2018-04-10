@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.Build.Player;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,6 +39,15 @@ public class Boss : MonoBehaviour {
 	}
 
 	private void Die() {
+		int score = (int) (50 * DifficultyManager.Instance.Difficulty);
+		if (score > 100) score = 100;
+		
+		Vector3 pos = transform.position;
+		Vector3 dir = (pos - Player.Instance.transform.position).normalized;
+		ScoreText text = Instantiate(PrefabManager.Instance.ScoreText, pos, Quaternion.identity);
+		text.Initialize(score, dir, pos); 
+		
+		GameManager.Instance.GetScore(score);
 		Destroy(gameObject);
 	}
 	
