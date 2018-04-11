@@ -36,6 +36,7 @@ public class Boss : MonoBehaviour {
 	private AudioSource source;
 	private AudioSource explodeSource;
 	private AudioSource hitPlayerSource;
+	private float maxHealth;
 	
 	public void TakeDamage(float amount) {
 		if (isDead) return;
@@ -44,10 +45,10 @@ public class Boss : MonoBehaviour {
 			Die();	
 		}
 
-		healthSlider.value = health / 100f;
-		fill.color = Color.Lerp(dieColor, fullColor, health / 100f);
+		healthSlider.value = health / maxHealth;
+		fill.color = Color.Lerp(dieColor, fullColor, health / maxHealth);
 		
-		if (health / 100f < (float) spikes.Count / spikeCount && spikes.Count >= 1) {
+		if (health / maxHealth < (float) spikes.Count / spikeCount && spikes.Count >= 1) {
 			Spike spike = spikes[0];
 			spikes.RemoveAt(0);
 			spike.transform.parent = null;
@@ -111,7 +112,8 @@ public class Boss : MonoBehaviour {
 		float moveModifier = DifficultyManager.Instance.Evaluate(moveModifierCurve);
 		
 		radius = baseRadius * scaleFactor;
-		health = health * DifficultyManager.Instance.Evaluate(healthCurve);
+		maxHealth = health * DifficultyManager.Instance.Evaluate(healthCurve);
+		health = maxHealth;
 		transform.localScale *= scaleFactor;
 		
 		moveForce = moveForce * moveModifier;
