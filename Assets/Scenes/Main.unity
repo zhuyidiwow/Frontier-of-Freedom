@@ -2717,7 +2717,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Difficulty: 0
-  DropPerMinute: 0.75
+  timeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 34.210266
+      value: -0.5522461
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 180
+      value: 2
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   scoreCurve:
     serializedVersion: 2
     m_Curve:

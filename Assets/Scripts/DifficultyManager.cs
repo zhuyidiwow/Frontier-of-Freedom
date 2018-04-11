@@ -7,12 +7,11 @@ public class DifficultyManager : MonoBehaviour {
     public static DifficultyManager Instance;
 
     [HideInInspector] public float Difficulty;
-    public float DropPerMinute;
 
+    [SerializeField] private AnimationCurve timeCurve;
     [SerializeField] private AnimationCurve scoreCurve;
     [SerializeField] private AnimationCurve itemCurve;
     
-    private float dropPerSec;
     private float startTime;
     private float timeModifier;
     private float scoreModifier;
@@ -35,19 +34,21 @@ public class DifficultyManager : MonoBehaviour {
     }
 
     private void Start() {
-        dropPerSec = DropPerMinute / 60f;
         startTime = Time.time;
     }
 
     private void Update() {
         int score = GameManager.Instance.Score;
-        Mathf.Clamp(score, 0, scoreCurve[scoreCurve.length].time);
-        
-        timeModifier = -dropPerSec * (Time.time - startTime);
+        Mathf.Clamp(score, 0, scoreCurve.keys[scoreCurve.keys.Length - 1].time);
+
+        float elapsedTime = Time.time - startTime;
+        Mathf.Clamp(elapsedTime, 0f, 180f);
+        timeModifier = timeCurve.Evaluate(elapsedTime);
         scoreModifier = scoreCurve.Evaluate(score);
         
         Difficulty = 1f + timeModifier + scoreModifier + itemModifier;
         Mathf.Clamp(Difficulty, 0.5f, 5f);
+//        Debug.Log(Difficulty);
     }
     
     
