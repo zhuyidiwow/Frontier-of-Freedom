@@ -25,6 +25,9 @@ public class CameraManager : MonoBehaviour {
 	}
 
 	private void Update() {
+		if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android) {
+			return;
+		}
 		Vector3 mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
 		mousePos -= new Vector3(0.5f, 0.5f, 0f);
 		offset = mousePos * OffsetMultiplier;

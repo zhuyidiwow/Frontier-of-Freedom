@@ -124,7 +124,7 @@ public class Player : MonoBehaviour {
         for (int t = 0; t < Input.touchCount; t++) {
             if (Input.GetTouch(t).phase == TouchPhase.Began) {
                 float distance;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(t).position);
                 plane.Raycast(ray, out distance);
                 Vector3 touchPos = ray.origin + ray.direction * distance;
                 Vector3 inputDir = touchPos - transform.position;
