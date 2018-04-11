@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private GameObject[] hideWhenEnd;
     [SerializeField] private AnimationCurve bossWaitScoreCurve;
     [SerializeField] private GameObject endGameCanvas;
+    [SerializeField] private Text endGameText;
     [SerializeField] private Text scoreText;
 
     [Header("Timer")] [SerializeField] private Slider timerSlider;
@@ -51,6 +52,10 @@ public class GameManager : MonoBehaviour {
         foreach (GameObject o in hideWhenEnd) {
             o.SetActive(false);
         }
+
+        if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) {
+            endGameText.text = "Or press with 2 fingers to continue";
+        }
     }
 
     private void Awake() {
@@ -66,9 +71,23 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (!isRunning && Input.GetKeyDown(KeyCode.R)) {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene("Main");
+        if (!isRunning ) {
+            if (Application.platform == RuntimePlatform.Android ||
+                Application.platform == RuntimePlatform.IPhonePlayer) {
+
+                if (Input.touchCount >= 3) {
+                    Time.timeScale = 1f;
+                    SceneManager.LoadScene("Main");
+                }
+            }
+            else {
+                if (Input.GetKeyDown(KeyCode.R)) {
+                    Time.timeScale = 1f;
+                    SceneManager.LoadScene("Main");
+                }
+                
+            }
+            
         } 
     }
 

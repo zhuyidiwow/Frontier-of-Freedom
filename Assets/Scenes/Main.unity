@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.28640798, g: 0.58550817, b: 0.79071355, a: 1}
+  m_IndirectSpecularColor: {r: 0.261675, g: 0.5576116, b: 0.7930041, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1332,6 +1332,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 0
   endGameCanvas: {fileID: 1681876778}
+  endGameText: {fileID: 1166300535}
   scoreText: {fileID: 1522765482}
   timerSlider: {fileID: 35245616}
   timerText: {fileID: 1774551665}
@@ -1863,7 +1864,7 @@ GameObject:
   - component: {fileID: 1166300536}
   - component: {fileID: 1166300535}
   m_Layer: 5
-  m_Name: Text (1)
+  m_Name: Restart Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

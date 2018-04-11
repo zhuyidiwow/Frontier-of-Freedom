@@ -25,14 +25,19 @@ public class CameraManager : MonoBehaviour {
 	}
 
 	private void Update() {
+		Vector3 targetPosition;
 		if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android) {
-			return;
+			targetPosition = player.transform.position;
+			targetPosition.z = transform.position.z;
 		}
-		Vector3 mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-		mousePos -= new Vector3(0.5f, 0.5f, 0f);
-		offset = mousePos * OffsetMultiplier;
-		Vector3 targetPosition = player.transform.position + offset;
-		targetPosition.z = transform.position.z;
+		else {
+			Vector3 mousePos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+			mousePos -= new Vector3(0.5f, 0.5f, 0f);
+			offset = mousePos * OffsetMultiplier;
+			targetPosition = player.transform.position + offset;
+			targetPosition.z = transform.position.z;
+		}
+		
 		transform.position = targetPosition;
 	}
 }
