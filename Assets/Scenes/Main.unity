@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.75}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -477,14 +477,14 @@ MonoBehaviour:
       outSlope: 0.01821707
       tangentMode: 0
     - serializedVersion: 2
-      time: 3.5355217
-      value: 1.2335602
-      inSlope: 0.09955444
-      outSlope: 0.09955444
+      time: 3.5699456
+      value: 1.4053742
+      inSlope: 0.30017003
+      outSlope: 0.30017003
       tangentMode: 136
     - serializedVersion: 2
-      time: 6
-      value: 1.5
+      time: 5.989746
+      value: 2.5
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -1298,6 +1298,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Canvas: {fileID: 953683568}
+  hideWhenEnd:
+  - {fileID: 2135269087}
+  - {fileID: 95157194}
   bossWaitScoreCurve:
     serializedVersion: 2
     m_Curve:
@@ -1335,7 +1338,7 @@ MonoBehaviour:
   timerCap: 180
   Timer: 0
   Score: 0
-  clipBrickBreak: {fileID: 8300000, guid: 2ad099319999c8540b75fba70fc8454a, type: 3}
+  clipBrickBreak: {fileID: 8300000, guid: 30ec137fb60301b4f84466eb410ff55e, type: 3}
 --- !u!4 &627214122
 Transform:
   m_ObjectHideFlags: 0
@@ -1476,7 +1479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.75}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -2118,6 +2121,82 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1400311212}
+--- !u!1 &1448183456
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1448183457}
+  - component: {fileID: 1448183459}
+  - component: {fileID: 1448183458}
+  m_Layer: 5
+  m_Name: Credits
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1448183457
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1448183456}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1681876779}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -0.15002441, y: -222}
+  m_SizeDelta: {x: 1119.7, y: 116.9}
+  m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1448183458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1448183456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 8daa68f2059a8dd41a090f316c96ba28, type: 3}
+    m_FontSize: 36
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 278
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1.35
+  m_Text: 'Game by Yidi
+
+    Sound by Yutian'
+--- !u!222 &1448183459
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1448183456}
 --- !u!1 &1504112551
 GameObject:
   m_ObjectHideFlags: 0
@@ -2429,6 +2508,7 @@ RectTransform:
   m_Children:
   - {fileID: 842056964}
   - {fileID: 1166300534}
+  - {fileID: 1448183457}
   m_Father: {fileID: 953683569}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2643,43 +2723,61 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 0.024291992
       inSlope: 0
       outSlope: 0
       tangentMode: 136
     - serializedVersion: 2
       time: 147.19942
-      value: 1
+      value: 1.024292
       inSlope: 0.0035584816
       outSlope: 0.0035584816
       tangentMode: 0
     - serializedVersion: 2
       time: 801.87354
-      value: 1.7815943
+      value: 1.8058863
       inSlope: 0.0000061770215
       outSlope: 0.0000061770215
       tangentMode: 0
     - serializedVersion: 2
       time: 1552.5436
-      value: 2.2233794
+      value: 2.2476714
       inSlope: 0.0043304535
       outSlope: 0.0043304535
       tangentMode: 0
     - serializedVersion: 2
       time: 2073.3726
-      value: 3.3285341
+      value: 3.352826
       inSlope: -0.0023686169
       outSlope: -0.0023686169
       tangentMode: 0
     - serializedVersion: 2
       time: 2988.8923
-      value: 4.077905
+      value: 4.102197
       inSlope: 0.0014277102
       outSlope: 0.0014277102
       tangentMode: 0
     - serializedVersion: 2
       time: 5000
-      value: 5
+      value: 5.024292
+      inSlope: 0.0010644333
+      outSlope: 0.0010644333
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 5941.4062
+      value: 7.2449512
+      inSlope: -0.0003697153
+      outSlope: -0.0003697153
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 7973.097
+      value: 9.236897
+      inSlope: -0.0007445145
+      outSlope: -0.0007445145
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 11080.018
+      value: 12.17506
       inSlope: 0
       outSlope: 0
       tangentMode: 136

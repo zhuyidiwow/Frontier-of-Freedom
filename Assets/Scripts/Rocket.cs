@@ -24,6 +24,9 @@ public class Rocket : MonoBehaviour {
     private void FixedUpdate() {
         if (target == null) {
             target = EnemyManager.Instance.GetNearest(transform.position);
+            if (target == null) {
+                Explode();
+            }
         }
         rb.AddForce( (target.transform.position - transform.position).normalized * moveForce);
         CapSpeed();

@@ -41,7 +41,7 @@ public class DifficultyManager : MonoBehaviour {
 
     private void Update() {
         int score = GameManager.Instance.Score;
-        Mathf.Clamp(score, 0, 5000);
+        Mathf.Clamp(score, 0, scoreCurve[scoreCurve.length].time);
         
         timeModifier = -dropPerSec * (Time.time - startTime);
         scoreModifier = scoreCurve.Evaluate(score);

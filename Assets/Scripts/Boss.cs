@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Boss : MonoBehaviour {
 
+	[SerializeField] private AnimationCurve healthCurve;
 	[SerializeField] private AnimationCurve damageModifierCurve;
 	[SerializeField] private AnimationCurve scaleFactorCurve;
 	[SerializeField] private AnimationCurve moveModifierCurve;
@@ -110,7 +111,7 @@ public class Boss : MonoBehaviour {
 		float moveModifier = DifficultyManager.Instance.Evaluate(moveModifierCurve);
 		
 		radius = baseRadius * scaleFactor;
-		health = health * scaleFactor;
+		health = health * DifficultyManager.Instance.Evaluate(healthCurve);
 		transform.localScale *= scaleFactor;
 		
 		moveForce = moveForce * moveModifier;

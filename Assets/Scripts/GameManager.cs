@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     public static GameManager Instance;
 
     public GameObject Canvas;
+    [SerializeField] private GameObject[] hideWhenEnd;
     [SerializeField] private AnimationCurve bossWaitScoreCurve;
     [SerializeField] private GameObject endGameCanvas;
     [SerializeField] private Text scoreText;
@@ -21,13 +22,13 @@ public class GameManager : MonoBehaviour {
     [HideInInspector] public int Score = 0;
     private bool isRunning;
 
-    public AudioClip clipBrickBreak;
+    [SerializeField] private AudioClip clipBrickBreak;
 
 
     public void PlayBrickBreakAudio() {
         AudioSource source = gameObject.AddComponent<AudioSource>();
-        Utilities.Audio.PlayAudio(source, clipBrickBreak, 0.03f);
-        Destroy(source, 1.5f);
+        Utilities.Audio.PlayAudio(source, clipBrickBreak, 0.3f, false, Random.Range(1f, 1.2f));
+        Destroy(source, 0.5f);
     }
     
     public void GetScore(int amount) {
@@ -47,6 +48,9 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 0.15f;
         endGameCanvas.SetActive(true);
         isRunning = false;
+        foreach (GameObject o in hideWhenEnd) {
+            o.SetActive(false);
+        }
     }
 
     private void Awake() {

@@ -1229,7 +1229,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 224402079332778492}
   m_HandleRect: {fileID: 0}
@@ -1292,6 +1292,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6302fd91c77314c499ec94924efc6d82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 1.1930788
+      outSlope: 1.1930788
+      tangentMode: 136
+    - serializedVersion: 2
+      time: 3.3526704
+      value: 5.211441
+      inSlope: 3.9776547
+      outSlope: 3.9776547
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 6
+      value: 10
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   damageModifierCurve:
     serializedVersion: 2
     m_Curve:
