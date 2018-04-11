@@ -21,7 +21,6 @@ public class Boss : MonoBehaviour {
 	[SerializeField] private float speedCap;
 	[SerializeField] private float rotationSpeed;
 	[SerializeField] private GameObject dieParticle;
-	[SerializeField] private AudioClip moveClip;
 	[SerializeField] private AudioClip hitPlayerClip;
 	[SerializeField] private AudioClip[] explodeClips;
 	
@@ -124,7 +123,6 @@ public class Boss : MonoBehaviour {
 		source = GetComponent<AudioSource>();
 		explodeSource = gameObject.AddComponent<AudioSource>();
 		hitPlayerSource = gameObject.AddComponent<AudioSource>();
-		Utilities.Audio.PlayAudio(source, moveClip, 1f, true);
 	}
 
 	private void Update() {

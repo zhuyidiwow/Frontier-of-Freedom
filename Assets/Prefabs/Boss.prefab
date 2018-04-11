@@ -1124,7 +1124,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1219e6f2c7e1ae643a8650b442d39ae3, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1135,9 +1135,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 30
+  MaxDistance: 35
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -1145,20 +1145,32 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
-      time: 0
+      time: 0.028571429
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -2.726022
+      outSlope: -2.726022
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.26670575
+      value: 0.49627686
+      inSlope: -1.4131569
+      outSlope: -1.4131569
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.9142857
+      value: 0.03125
+      inSlope: -0.034193356
+      outSlope: -0.034193356
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: 0.028571429
+      inSlope: -0.028582849
+      outSlope: -0.028582849
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   panLevelCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -1424,8 +1436,7 @@ MonoBehaviour:
   rotationSpeed: 120
   dieParticle: {fileID: 1343723894232812, guid: b1fb07f2dc670b54ab3340c68dc8a2e6,
     type: 2}
-  moveClip: {fileID: 8300000, guid: ff93e4ddfd8084745a82f65ccb0ddf33, type: 3}
-  hitPlayerClip: {fileID: 8300000, guid: 1219e6f2c7e1ae643a8650b442d39ae3, type: 3}
+  hitPlayerClip: {fileID: 8300000, guid: ff93e4ddfd8084745a82f65ccb0ddf33, type: 3}
   explodeClips:
   - {fileID: 8300000, guid: 5eacd2eea1a83d643b3c43b472314a8d, type: 3}
   - {fileID: 8300000, guid: 786661cf4448fe54fb887fda374960b9, type: 3}

@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
         }
 
         if (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) {
-            endGameText.text = "Or press with 2 fingers to continue";
+            endGameText.text = "Or press with 3 fingers to continue";
         }
     }
 

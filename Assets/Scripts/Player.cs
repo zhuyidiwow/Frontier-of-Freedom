@@ -101,7 +101,7 @@ public class Player : MonoBehaviour {
         rocketLauncher = GetComponent<RocketLauncher>();
 
         plane = new Plane(Vector3.back, transform.position);
-        bulletLaunchers = new List<Weapon> {Instantiate(PrefabManager.Instance.MissileLauncher).GetComponent<Weapon>()};
+        bulletLaunchers = new List<Weapon> {Instantiate(PrefabManager.Instance.MissileLauncher, transform).GetComponent<Weapon>()};
         UpdateUI();
 
         sourceHit = gameObject.AddComponent<AudioSource>();
