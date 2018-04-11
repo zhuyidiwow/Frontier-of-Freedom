@@ -13,7 +13,23 @@ public class EnemyManager : MonoBehaviour {
     [SerializeField] private AnimationCurve enemySizeCurve;
 
     public bool ShouldSpawnEnemies() {
-        return Enemies.Count < (int) DifficultyManager.Instance.Evaluate(enemySizeCurve);
+        float modifier;
+        switch (GameManager.Instance.BossCount) {
+            case 0:
+                modifier = 1f;
+                break;
+            case 1:
+                modifier = 0.75f;
+                break;
+            case 2:
+                modifier = 0.25f;
+                break;
+            default:
+                modifier = 1f;
+                break;
+        }
+
+        return Enemies.Count < (int) (DifficultyManager.Instance.Evaluate(enemySizeCurve) * modifier);
     }
 
     private void Awake() {

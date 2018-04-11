@@ -18,13 +18,15 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Text timerText;
     [SerializeField] private float timerCap;
 
-    [HideInInspector] public float Timer;
+    
 
     [HideInInspector] public int Score = 0;
+    [HideInInspector] public int BossCount = 0;
+    
     private bool isRunning;
 
     [SerializeField] private AudioClip clipBrickBreak;
-
+    
 
     public void PlayBrickBreakAudio() {
         AudioSource source = gameObject.AddComponent<AudioSource>();
@@ -38,11 +40,6 @@ public class GameManager : MonoBehaviour {
         Score += amount;
         scoreText.text = Score.ToString();
         
-    }
-
-    public void PickExtraTime(float amount) {
-        Timer += amount;
-        Mathf.Clamp(Timer, 0f, timerCap);
     }
 
     public void EndGame() {
@@ -65,7 +62,6 @@ public class GameManager : MonoBehaviour {
 
     private void Start() {
         endGameCanvas.SetActive(false);
-        Timer = timerCap;
         StartCoroutine(SpawnBossCoroutine());
         StartCoroutine(SpawnItemCoroutine());
     }
@@ -85,16 +81,10 @@ public class GameManager : MonoBehaviour {
                     Time.timeScale = 1f;
                     SceneManager.LoadScene("Main");
                 }
-                
             }
-            
         } 
     }
 
-    private void UpdateTimerUI() {
-        timerSlider.value = Timer / timerCap;
-        timerText.text = Timer.ToString().Substring(0, 4);
-    }
 
     private IEnumerator SpawnBossCoroutine() {
         int count = 0;
@@ -102,16 +92,16 @@ public class GameManager : MonoBehaviour {
         while (isRunning) {
             var score = waitScore;
             yield return new WaitUntil(()=> Score > score);
+            yield return new WaitUntil(()=> BossCount < 2);
             Instantiate(PrefabManager.Instance.Boss,
                 Player.Instance.transform.position + new Vector3(CameraManager.Instance.ViewRange.x, CameraManager.Instance.ViewRange.y, 0f),
                 Quaternion.identity);
             count++;
+            BossCount++;
             waitScore += (int) bossWaitScoreCurve.Evaluate(count > 10 ? 10 : count);
         }
     }
     
-    //TODO: balance this
-
     private IEnumerator SpawnItemCoroutine() {
         while (isRunning) {
             float waitTime = Random.Range(3f, 6f);

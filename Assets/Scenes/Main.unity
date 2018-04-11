@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.261675, g: 0.5576116, b: 0.7930041, a: 1}
+  m_IndirectSpecularColor: {r: 0.28640798, g: 0.58550817, b: 0.79071355, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1313,18 +1313,18 @@ MonoBehaviour:
     - serializedVersion: 2
       time: 1
       value: 300
-      inSlope: 32.356903
-      outSlope: 32.356903
+      inSlope: 97.34877
+      outSlope: 97.34877
       tangentMode: 136
     - serializedVersion: 2
-      time: 5.717092
-      value: 384.9874
-      inSlope: 22.222221
-      outSlope: 22.222221
+      time: 4.1089377
+      value: 787.4629
+      inSlope: 77.77778
+      outSlope: 77.77778
       tangentMode: 136
     - serializedVersion: 2
       time: 10
-      value: 500
+      value: 1000
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -1337,8 +1337,8 @@ MonoBehaviour:
   timerSlider: {fileID: 35245616}
   timerText: {fileID: 1774551665}
   timerCap: 180
-  Timer: 0
   Score: 0
+  BossCount: 0
   clipBrickBreak: {fileID: 8300000, guid: 30ec137fb60301b4f84466eb410ff55e, type: 3}
 --- !u!4 &627214122
 Transform:

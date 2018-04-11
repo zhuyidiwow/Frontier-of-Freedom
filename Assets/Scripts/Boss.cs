@@ -60,6 +60,7 @@ public class Boss : MonoBehaviour {
 	}
 
 	private IEnumerator DieCoroutine() {
+		GameManager.Instance.BossCount--;
 		isDead = true;
 		healthSlider.gameObject.SetActive(false);
 		rb.isKinematic = true;
