@@ -16,14 +16,7 @@ public class PrefabManager : MonoBehaviour {
     public ScoreText ScoreText;
     public Boss Boss;
     
-    
     private void Awake() {
         if (Instance == null) Instance = this;
-    }
-
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.T)) {
-            Instantiate(Rocket, Player.Instance.transform.position, Quaternion.identity);
-        }
     }
 }

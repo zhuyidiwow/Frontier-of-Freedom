@@ -17,7 +17,7 @@ public class Breakable : MonoBehaviour {
 			GameManager.Instance.PlayBrickBreakAudio();
 		}
 		GameObject particle = Instantiate(breakParticle, transform.position, Quaternion.identity);
-		Destroy(particle, 3f);
+		Destroy(particle, 1.5f);
 		Destroy(gameObject);
 	}
 }
