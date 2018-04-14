@@ -80,7 +80,6 @@ public class Boss : MonoBehaviour {
 		}
 		SpawnOneParticle();SpawnOneParticle();SpawnOneParticle();
 		int score = (int) (50 * DifficultyManager.Instance.Difficulty);
-		if (score > 100) score = 100;
 		
 		Vector3 pos = transform.position;
 		Vector3 dir = (pos - Player.Instance.transform.position).normalized;

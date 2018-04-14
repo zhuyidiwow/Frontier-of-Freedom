@@ -1,10 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using System.Collections;
+using System.IO;
+using System.Text;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour {
+
+
     public static GameManager Instance;
 
     public GameObject Canvas;
@@ -14,32 +20,23 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private Text endGameText;
     [SerializeField] private Text scoreText;
 
-    [Header("Timer")] [SerializeField] private Slider timerSlider;
-    [SerializeField] private Text timerText;
-    [SerializeField] private float timerCap;
-
-    
-
     [HideInInspector] public int Score = 0;
     [HideInInspector] public int BossCount = 0;
-    
-    private bool isRunning;
 
+    private bool isRunning;
     [SerializeField] private AudioClip clipBrickBreak;
-    
 
     public void PlayBrickBreakAudio() {
         AudioSource source = gameObject.AddComponent<AudioSource>();
         Utilities.Audio.PlayAudio(source, clipBrickBreak, 0.3f, false, Random.Range(1f, 1.2f));
         Destroy(source, 0.5f);
     }
-    
+
     public void GetScore(int amount) {
         if (!isRunning) return;
-        
+
         Score += amount;
         scoreText.text = Score.ToString();
-        
     }
 
     public void EndGame() {
@@ -64,35 +61,33 @@ public class GameManager : MonoBehaviour {
         endGameCanvas.SetActive(false);
         StartCoroutine(SpawnBossCoroutine());
         StartCoroutine(SpawnItemCoroutine());
+
     }
 
     private void Update() {
-        if (!isRunning ) {
+        if (!isRunning) {
             if (Application.platform == RuntimePlatform.Android ||
                 Application.platform == RuntimePlatform.IPhonePlayer) {
-
                 if (Input.touchCount >= 3) {
                     Time.timeScale = 1f;
                     SceneManager.LoadScene("Main");
                 }
-            }
-            else {
+            } else {
                 if (Input.GetKeyDown(KeyCode.R)) {
                     Time.timeScale = 1f;
                     SceneManager.LoadScene("Main");
                 }
             }
-        } 
+        }
     }
-
 
     private IEnumerator SpawnBossCoroutine() {
         int count = 0;
         int waitScore = (int) bossWaitScoreCurve.Evaluate(count);
         while (isRunning) {
             var score = waitScore;
-            yield return new WaitUntil(()=> Score > score);
-            yield return new WaitUntil(()=> BossCount < 2);
+            yield return new WaitUntil(() => Score > score);
+            yield return new WaitUntil(() => BossCount < 2);
             Instantiate(PrefabManager.Instance.Boss,
                 Player.Instance.transform.position + new Vector3(CameraManager.Instance.ViewRange.x, CameraManager.Instance.ViewRange.y, 0f),
                 Quaternion.identity);
@@ -101,7 +96,7 @@ public class GameManager : MonoBehaviour {
             waitScore += (int) bossWaitScoreCurve.Evaluate(count > 10 ? 10 : count);
         }
     }
-    
+
     private IEnumerator SpawnItemCoroutine() {
         while (isRunning) {
             float waitTime = Random.Range(3f, 6f);
