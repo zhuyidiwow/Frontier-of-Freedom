@@ -1334,9 +1334,6 @@ MonoBehaviour:
   endGameCanvas: {fileID: 1681876778}
   endGameText: {fileID: 1166300535}
   scoreText: {fileID: 1522765482}
-  timerSlider: {fileID: 35245616}
-  timerText: {fileID: 1774551665}
-  timerCap: 180
   Score: 0
   BossCount: 0
   clipBrickBreak: {fileID: 8300000, guid: 30ec137fb60301b4f84466eb410ff55e, type: 3}
@@ -2728,14 +2725,14 @@ MonoBehaviour:
       outSlope: 0
       tangentMode: 136
     - serializedVersion: 2
-      time: 34.210266
-      value: -0.5522461
+      time: 50.03607
+      value: -0.20776367
       inSlope: 0
       outSlope: 0
       tangentMode: 136
     - serializedVersion: 2
-      time: 180
-      value: 2
+      time: 180.67969
+      value: 1.5752869
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -2754,54 +2751,48 @@ MonoBehaviour:
     - serializedVersion: 2
       time: 147.19942
       value: 1.024292
-      inSlope: 0.0035584816
-      outSlope: 0.0035584816
+      inSlope: 0.0025524911
+      outSlope: 0.0025524911
       tangentMode: 0
     - serializedVersion: 2
-      time: 801.87354
-      value: 1.8058863
-      inSlope: 0.0000061770215
-      outSlope: 0.0000061770215
+      time: 989.28986
+      value: 2.0105371
+      inSlope: 0.000021427879
+      outSlope: 0.000021427879
       tangentMode: 0
     - serializedVersion: 2
-      time: 1552.5436
-      value: 2.2476714
-      inSlope: 0.0043304535
-      outSlope: 0.0043304535
+      time: 2222.3108
+      value: 2.3187692
+      inSlope: 0.0023841858
+      outSlope: 0.0023841858
       tangentMode: 0
     - serializedVersion: 2
-      time: 2073.3726
-      value: 3.352826
-      inSlope: -0.0023686169
-      outSlope: -0.0023686169
+      time: 2690.5403
+      value: 3.8160858
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 2988.8923
-      value: 4.102197
-      inSlope: 0.0014277102
-      outSlope: 0.0014277102
+      time: 3997.0457
+      value: 3.684633
+      inSlope: 0.0016045317
+      outSlope: 0.0016045317
       tangentMode: 0
     - serializedVersion: 2
-      time: 5000
-      value: 5.024292
-      inSlope: 0.0010644333
-      outSlope: 0.0010644333
-      tangentMode: 136
-    - serializedVersion: 2
-      time: 5941.4062
-      value: 7.2449512
-      inSlope: -0.0003697153
-      outSlope: -0.0003697153
+      time: 4984.6123
+      value: 5.09027
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 7973.097
-      value: 9.236897
-      inSlope: -0.0007445145
-      outSlope: -0.0007445145
+      time: 6005.484
+      value: 4.8168535
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 11080.018
-      value: 12.17506
+      time: 8447.617
+      value: 5.770569
       inSlope: 0
       outSlope: 0
       tangentMode: 136
