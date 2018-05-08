@@ -4,12 +4,12 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.GameCenter;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
+
 public class GameManager : MonoBehaviour {
-
-
     public static GameManager Instance;
 
     public GameObject Canvas;
@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour {
         endGameCanvas.SetActive(false);
         StartCoroutine(SpawnBossCoroutine());
         StartCoroutine(SpawnItemCoroutine());
-
     }
 
     private void Update() {

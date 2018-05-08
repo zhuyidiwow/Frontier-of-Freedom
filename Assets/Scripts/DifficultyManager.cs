@@ -48,7 +48,7 @@ public class DifficultyManager : MonoBehaviour {
         
         Difficulty = 1f + timeModifier + scoreModifier + itemModifier;
         Mathf.Clamp(Difficulty, 0.5f, 5f);
-        Debug.Log(Difficulty);
+//        Debug.Log(Difficulty);
     }
     
     
